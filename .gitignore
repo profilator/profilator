@@ -102,3 +102,12 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# token files
+tokens.*
+token.*
+token/
+tokens/
+
+#pycharm files
+.idea/*
