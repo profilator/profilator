@@ -1,6 +1,5 @@
 from twitter import Api
 
-
 class UserTimelineStatistics(object):
     # tutaj wrzucamy metody służące do zbierania podstawowych statystyk użytkownika
 
@@ -13,6 +12,26 @@ class UserTimelineStatistics(object):
         return replies
 
     def replies_percentage(self, timeline):
-        # zwraca procent odpowiedzi z pośród wszystkich statusów w timeline
+        # zwraca procent odpowiedzi spośród wszystkich statusów w timeline
         replies = self.replies_count(timeline)
         return replies / len(timeline)
+
+    def day_counter(self, timeline):
+        # zwraca słownik zawierający ilość postów, które dodano w określonych dniach tygodnia
+        import collections as col
+        # nie jestem pewien, czy ten import powinien być poza definicją metody
+        days = col.Counter()
+        for k in timeline:
+            days[k.created_at[:3]] += 1
+        return days
+    
+    def most_active_day(self, timeline):
+        # zwraca dzień, w którym pojawiło się najwięcej postów
+        days = day_counter(timeline)
+        d = 0
+        for i, v in days.items():
+            if(v > d):
+                d = v
+                mad = i
+        return mad
+
