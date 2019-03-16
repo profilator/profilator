@@ -36,3 +36,11 @@ class UserTimelineStatistics(object):
                 mad = i
         return mad
 
+    def average_favourites(self, timeline):
+        # zwraca średnią ilość ulubionych pod postami użytkownika
+        total_likes = 0
+        posts = 0
+        for post in timeline:
+            total_likes += post["favorite_count"]
+            posts += 1
+        return posts / total_likes
