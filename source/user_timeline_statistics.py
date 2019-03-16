@@ -1,5 +1,6 @@
 from twitter import Api
 
+
 class UserTimelineStatistics(object):
     # tutaj wrzucamy metody służące do zbierania podstawowych statystyk użytkownika
 
@@ -14,7 +15,7 @@ class UserTimelineStatistics(object):
     def replies_percentage(self, timeline):
         # zwraca procent odpowiedzi spośród wszystkich statusów w timeline
         replies = self.replies_count(timeline)
-        return replies / len(timeline)
+        return replies / len(timeline) * 100
 
     def day_counter(self, timeline):
         # zwraca słownik zawierający ilość postów, które dodano w określonych dniach tygodnia
