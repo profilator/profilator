@@ -44,3 +44,20 @@ class UserTimelineStatistics(object):
             total_likes += post["favorite_count"]
             posts += 1
         return posts / total_likes
+
+    def hours_count(timeline, n = None):
+        # Zwraca listę zawierajacą godziny, o jakich były dodawane posty oraz liczby postów dodanych o każdej godzinie, posortwoaną wg liczby postów.
+        # Drugi argument to liczba elementów, jakie mają zostać zwrócone. Domyślnie zwraca całą listę.
+        import collections as col
+        hour_hist = col.Counter()
+        for val in timeline:
+            hour_hist[int(val.created_at[11:13])] += 1
+        return hour_hist.most_common(n)
+
+    def avg_hour(timeline):
+        # Zwraca średnią z godzin, o jakich były dodawane posty.
+        a = 0; n = 0
+        for val in timeline:
+            a += int(val.created_at[11:13])
+            n += 1
+        return a/n;
