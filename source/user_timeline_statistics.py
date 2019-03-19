@@ -1,5 +1,6 @@
 from twitter import Status
 from collections.abc import Iterable
+import collections as col
 
 
 class UserTimelineStatistics(object):
@@ -26,8 +27,6 @@ class UserTimelineStatistics(object):
 
     def day_counter(self, timeline):
         # zwraca słownik zawierający ilość postów, które dodano w określonych dniach tygodnia
-        import collections as col
-        # nie jestem pewien, czy ten import powinien być poza definicją metody
         days = col.Counter()
         for k in timeline:
             days[k.created_at[:3]] += 1
@@ -35,12 +34,14 @@ class UserTimelineStatistics(object):
     
     def most_active_day(self, timeline):
         # zwraca dzień, w którym pojawiło się najwięcej postów
-        days = day_counter(timeline)
+        # mad - most active day
+        days = self.day_counter(timeline)
+        # d to zmienna pomocnicza przechowująca obecną największą liczbę dni, w których pojawiała się aktywność
         d = 0
-        for i, v in days.items():
-            if(v > d):
-                d = v
-                mad = i
+        for day_of_week, number_of_days in days.items():
+            if(number_of_days > d):
+                d = number_of_days
+                mad = day_of_week
         return mad
 
     def average_favourites(self, timeline):
@@ -55,7 +56,6 @@ class UserTimelineStatistics(object):
     def hours_count(timeline, n = None):
         # Zwraca listę zawierajacą godziny, o jakich były dodawane posty oraz liczby postów dodanych o każdej godzinie, posortwoaną wg liczby postów.
         # Drugi argument to liczba elementów, jakie mają zostać zwrócone. Domyślnie zwraca całą listę.
-        import collections as col
         hour_hist = col.Counter()
         for val in timeline:
             hour_hist[int(val.created_at[11:13])] += 1
