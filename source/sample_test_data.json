@@ -1,0 +1,528 @@
+[
+    {
+        "created_at": "Tue Mar 19 17:10:55 +0000 2019",
+        "hashtags": [],
+        "id": 1108053249075171329,
+        "id_str": "1108053249075171329",
+        "lang": "pl",
+        "retweet_count": 15,
+        "retweeted_status": {
+            "created_at": "Tue Mar 19 17:03:48 +0000 2019",
+            "favorite_count": 106,
+            "hashtags": [],
+            "id": 1108051457599787008,
+            "id_str": "1108051457599787008",
+            "lang": "pl",
+            "retweet_count": 15,
+            "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+            "text": "DRUGI DLA NAS DO 23 I PROWADZIMY Z ZENITEM KAZA\u0143 2:0!!!!!!!!! \ud83d\udd25\ud83d\udd25\ud83d\udd25\ud83d\udd25\ud83d\udd25\ud83d\udd25\ud83d\udd25 JESZCZE JEDEN!!!!!! \u270a\u270a\u270a\u270a\u270a\u270a\u270a\u270a \n\n\ud83d\udcfa\u2026 https://t.co/YYxO41EkaG",
+            "truncated": true,
+            "urls": [
+                {
+                    "expanded_url": "https://twitter.com/i/web/status/1108051457599787008",
+                    "url": "https://t.co/YYxO41EkaG"
+                }
+            ],
+            "user": {
+                "id": 2776399873,
+                "id_str": "2776399873"
+            },
+            "user_mentions": []
+        },
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "RT @Trefl_Gdansk: DRUGI DLA NAS DO 23 I PROWADZIMY Z ZENITEM KAZA\u0143 2:0!!!!!!!!! \ud83d\udd25\ud83d\udd25\ud83d\udd25\ud83d\udd25\ud83d\udd25\ud83d\udd25\ud83d\udd25 JESZCZE JEDEN!!!!!! \u270a\u270a\u270a\u270a\u270a\u270a\u270a\u270a \n\n\ud83d\udcfa @CANALPLUS_SPORT\u2026",
+        "urls": [],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": [
+            {
+                "id": 2776399873,
+                "id_str": "2776399873",
+                "name": "Trefl Gda\u0144sk",
+                "screen_name": "Trefl_Gdansk"
+            },
+            {
+                "id": 413973458,
+                "id_str": "413973458",
+                "name": "CANAL+ SPORT",
+                "screen_name": "CANALPLUS_SPORT"
+            }
+        ]
+    },
+    {
+        "created_at": "Tue Mar 19 17:10:16 +0000 2019",
+        "favorite_count": 1,
+        "hashtags": [],
+        "id": 1108053083412721666,
+        "id_str": "1108053083412721666",
+        "in_reply_to_screen_name": "bweglarczyk",
+        "in_reply_to_status_id": 1108050856321138688,
+        "in_reply_to_user_id": 134398560,
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "@bweglarczyk w 1926 w pewnym Kraju by\u0142 zamach, ewidentnie z\u0142amano Konstytucj\u0119  - tak z polskiego przyk\u0142adu a mowimy\u2026 https://t.co/5mCBmQ52w8",
+        "truncated": true,
+        "urls": [
+            {
+                "expanded_url": "https://twitter.com/i/web/status/1108053083412721666",
+                "url": "https://t.co/5mCBmQ52w8"
+            }
+        ],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": [
+            {
+                "id": 134398560,
+                "id_str": "134398560",
+                "name": "Bartosz W\u0119glarczyk \ud83c\uddf5\ud83c\uddf1\ud83c\uddea\ud83c\uddfa\ud83c\uddfa\ud83c\uddf8",
+                "screen_name": "bweglarczyk"
+            }
+        ]
+    },
+    {
+        "created_at": "Tue Mar 19 16:44:48 +0000 2019",
+        "hashtags": [],
+        "id": 1108046677078958080,
+        "id_str": "1108046677078958080",
+        "in_reply_to_screen_name": "PrzemekPrekiel",
+        "in_reply_to_status_id": 1108043764738781185,
+        "in_reply_to_user_id": 341425647,
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "@PrzemekPrekiel z ziarna czy kartofli bo kran\u00f3wka dopiero po ?",
+        "urls": [],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": [
+            {
+                "id": 341425647,
+                "id_str": "341425647",
+                "name": "Przemys\u0142aw Prekiel",
+                "screen_name": "PrzemekPrekiel"
+            }
+        ]
+    },
+    {
+        "created_at": "Tue Mar 19 16:44:01 +0000 2019",
+        "favorite_count": 1,
+        "hashtags": [],
+        "id": 1108046476574375936,
+        "id_str": "1108046476574375936",
+        "in_reply_to_screen_name": "Grupa_PFR",
+        "in_reply_to_status_id": 1107963985654099969,
+        "in_reply_to_user_id": 803570979431743489,
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "@Grupa_PFR @PolishEmbassySG i zamiast inwestowa\u0107 i budowa\u0107 \"nowe\" zakupujemy ju\u017c istniej\u0105ce \"u\u017cywane\" a inwestycje\u2026 https://t.co/bEWdqCzKfe",
+        "truncated": true,
+        "urls": [
+            {
+                "expanded_url": "https://twitter.com/i/web/status/1108046476574375936",
+                "url": "https://t.co/bEWdqCzKfe"
+            }
+        ],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": [
+            {
+                "id": 803570979431743489,
+                "id_str": "803570979431743489",
+                "name": "Grupa PFR \ud83c\uddf5\ud83c\uddf1\ud83d\udcaf",
+                "screen_name": "Grupa_PFR"
+            },
+            {
+                "id": 538664663,
+                "id_str": "538664663",
+                "name": "PLinSingapore",
+                "screen_name": "PolishEmbassySG"
+            }
+        ]
+    },
+    {
+        "created_at": "Tue Mar 19 16:42:45 +0000 2019",
+        "favorite_count": 1,
+        "hashtags": [],
+        "id": 1108046159086604289,
+        "id_str": "1108046159086604289",
+        "in_reply_to_screen_name": "FelForsaken",
+        "in_reply_to_status_id": 1108045501214179328,
+        "in_reply_to_user_id": 4652214797,
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "@FelForsaken ale boczu\u015b z majerankiem, goloneczka z kapust\u0105 , schabik z ogorem czy sa\u0142at\u0105 a smalczyk z kwaszonym ogorem ?",
+        "urls": [],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": [
+            {
+                "id": 4652214797,
+                "id_str": "4652214797",
+                "name": "Escalus Horde",
+                "screen_name": "FelForsaken"
+            }
+        ]
+    },
+    {
+        "created_at": "Tue Mar 19 16:41:38 +0000 2019",
+        "hashtags": [],
+        "id": 1108045879204896775,
+        "id_str": "1108045879204896775",
+        "in_reply_to_screen_name": "pmswiader",
+        "in_reply_to_status_id": 1108045549314473984,
+        "in_reply_to_user_id": 2891418400,
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "@pmswiader zacytowa\u0142em opini\u0119 szefa Agencji ( dodam sam jestem ma\u0142oalkoholowy stad dostepniosc placowek ma ma\u0142e znaczenie)",
+        "urls": [],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": [
+            {
+                "id": 2891418400,
+                "id_str": "2891418400",
+                "name": "Pawe\u0142 \u015awi\u0105der",
+                "screen_name": "pmswiader"
+            }
+        ]
+    },
+    {
+        "created_at": "Tue Mar 19 16:40:02 +0000 2019",
+        "favorite_count": 1,
+        "hashtags": [],
+        "id": 1108045473481396232,
+        "id_str": "1108045473481396232",
+        "in_reply_to_screen_name": "fajfer2003",
+        "in_reply_to_status_id": 1108045007850754048,
+        "in_reply_to_user_id": 30028827,
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "@fajfer2003 prosze sprawdzic statystyki ile terenow nadaje si\u0119 do zamieszkania i ile do wykorzystania w celach roln\u2026 https://t.co/vXbmMjCY35",
+        "truncated": true,
+        "urls": [
+            {
+                "expanded_url": "https://twitter.com/i/web/status/1108045473481396232",
+                "url": "https://t.co/vXbmMjCY35"
+            }
+        ],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": [
+            {
+                "id": 30028827,
+                "id_str": "30028827",
+                "name": "Pawel Stepniewski",
+                "screen_name": "fajfer2003"
+            }
+        ]
+    },
+    {
+        "created_at": "Tue Mar 19 16:36:54 +0000 2019",
+        "favorite_count": 5,
+        "hashtags": [],
+        "id": 1108044686382563329,
+        "id_str": "1108044686382563329",
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "W\u015br\u00f3d kraj\u00f3w o najmniejszych zasobach grunt\u00f3w ornych przypadaj\u0105cych ma mieszka\u0144ca s\u0105 pr\u00f3cz Japonii:  Chiny - 8 ar\u00f3w\u2026 https://t.co/33fHVRyHJZ",
+        "truncated": true,
+        "urls": [
+            {
+                "expanded_url": "https://twitter.com/i/web/status/1108044686382563329",
+                "url": "https://t.co/33fHVRyHJZ"
+            }
+        ],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": []
+    },
+    {
+        "created_at": "Tue Mar 19 16:36:35 +0000 2019",
+        "favorite_count": 1,
+        "hashtags": [],
+        "id": 1108044608326590465,
+        "id_str": "1108044608326590465",
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "W UE najwi\u0119cej grunt\u00f3w ornych na mieszka\u0144ca przypada we Francji - 29 ar\u00f3w, Austrii - 16, Niemczech - 14 ar\u00f3w i W\u0142oszech - 12 ar\u00f3w.",
+        "urls": [],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": []
+    },
+    {
+        "created_at": "Tue Mar 19 16:36:17 +0000 2019",
+        "favorite_count": 1,
+        "hashtags": [],
+        "id": 1108044531700826113,
+        "id_str": "1108044531700826113",
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "W\u015br\u00f3d kraj\u00f3w maj\u0105cych najwi\u0119cej grunt\u00f3w ornych dla wy\u017cywienia swoich mieszka\u0144c\u00f3w obok Rosji s\u0105  USA - 49 ar\u00f3w/miesz\u2026 https://t.co/nDiAvI0PcO",
+        "truncated": true,
+        "urls": [
+            {
+                "expanded_url": "https://twitter.com/i/web/status/1108044531700826113",
+                "url": "https://t.co/nDiAvI0PcO"
+            }
+        ],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": []
+    },
+    {
+        "created_at": "Tue Mar 19 16:35:38 +0000 2019",
+        "favorite_count": 2,
+        "hashtags": [],
+        "id": 1108044367732846592,
+        "id_str": "1108044367732846592",
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "W Rosji na jednego mieszka\u0144ca przypada 84 ary ziemi ornej, a w Japonii tylko 3. \u015arednia \u015bwiatowa to 20 ar\u00f3w.",
+        "urls": [],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": []
+    },
+    {
+        "created_at": "Tue Mar 19 16:35:16 +0000 2019",
+        "favorite_count": 2,
+        "hashtags": [],
+        "id": 1108044275969900544,
+        "id_str": "1108044275969900544",
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "FAO: Najwi\u0119cej grunt\u00f3w ornych na mieszka\u0144ca ma Rosja",
+        "urls": [],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": []
+    },
+    {
+        "created_at": "Tue Mar 19 16:34:58 +0000 2019",
+        "favorite_count": 2,
+        "hashtags": [],
+        "id": 1108044198316593159,
+        "id_str": "1108044198316593159",
+        "lang": "pl",
+        "retweet_count": 1,
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "Czechy zrezygnuj\u0105 z restrykcyjnych kontroli polskiego mi\u0119sa",
+        "urls": [],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": []
+    },
+    {
+        "created_at": "Tue Mar 19 16:33:40 +0000 2019",
+        "hashtags": [],
+        "id": 1108043874788917249,
+        "id_str": "1108043874788917249",
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "W Polsce od pocz\u0105tku roku stwierdzono  608 przypadk\u00f3w ASF w\u015br\u00f3d dzik\u00f3w wobec 3347 rok wcze\u015bniej. W 2018 mieli\u015bmy wi\u2026 https://t.co/NHa0AGJcJQ",
+        "truncated": true,
+        "urls": [
+            {
+                "expanded_url": "https://twitter.com/i/web/status/1108043874788917249",
+                "url": "https://t.co/NHa0AGJcJQ"
+            }
+        ],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": []
+    },
+    {
+        "created_at": "Tue Mar 19 16:29:15 +0000 2019",
+        "hashtags": [],
+        "id": 1108042763596124160,
+        "id_str": "1108042763596124160",
+        "in_reply_to_screen_name": "pawel_soltys",
+        "in_reply_to_status_id": 1107760427885383680,
+        "in_reply_to_user_id": 44478025,
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "@pawel_soltys z\u017c\u00f3\u0142kni\u0119te banany w tymczasowym nie spe\u0142niaj\u0105cym wymog\u00f3w magazynie ? Inspiruj\u0105cy szpadelek pod \u015bcian\u0105 ?",
+        "urls": [],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": [
+            {
+                "id": 44478025,
+                "id_str": "44478025",
+                "name": "Pawel Soltys",
+                "screen_name": "pawel_soltys"
+            }
+        ]
+    },
+    {
+        "created_at": "Tue Mar 19 16:27:07 +0000 2019",
+        "favorite_count": 2,
+        "hashtags": [],
+        "id": 1108042222916825089,
+        "id_str": "1108042222916825089",
+        "in_reply_to_screen_name": "yrizona_",
+        "in_reply_to_status_id": 1108041923108003843,
+        "in_reply_to_user_id": 4032859115,
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "@yrizona_ a pani Profesor s\u0142onin\u0119 przepija bimberkiem ? Taki ma obraz Rolnika ?",
+        "urls": [],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": [
+            {
+                "id": 4032859115,
+                "id_str": "4032859115",
+                "name": "\ud83e\udd87yrizona",
+                "screen_name": "yrizona_"
+            }
+        ]
+    },
+    {
+        "created_at": "Tue Mar 19 16:26:08 +0000 2019",
+        "hashtags": [],
+        "id": 1108041976291774464,
+        "id_str": "1108041976291774464",
+        "lang": "pl",
+        "retweet_count": 5,
+        "retweeted_status": {
+            "created_at": "Tue Mar 19 16:21:09 +0000 2019",
+            "favorite_count": 7,
+            "hashtags": [],
+            "id": 1108040725164367872,
+            "id_str": "1108040725164367872",
+            "lang": "pl",
+            "retweet_count": 5,
+            "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+            "text": "Jednog\u0142o\u015bnie, co warto podkre\u015bli\u0107, Sejmik Mazowiecki przyj\u0105\u0142 stanowisko w sprawie obj\u0119cia pozametropolitarnej cz\u0119\u015bc\u2026 https://t.co/9kX6phE6se",
+            "truncated": true,
+            "urls": [
+                {
+                    "expanded_url": "https://twitter.com/i/web/status/1108040725164367872",
+                    "url": "https://t.co/9kX6phE6se"
+                }
+            ],
+            "user": {
+                "id": 961181894,
+                "id_str": "961181894"
+            },
+            "user_mentions": []
+        },
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "RT @StruzikAdam: Jednog\u0142o\u015bnie, co warto podkre\u015bli\u0107, Sejmik Mazowiecki przyj\u0105\u0142 stanowisko w sprawie obj\u0119cia pozametropolitarnej cz\u0119\u015bci woj.P\u2026",
+        "urls": [],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": [
+            {
+                "id": 961181894,
+                "id_str": "961181894",
+                "name": "Adam Struzik",
+                "screen_name": "StruzikAdam"
+            }
+        ]
+    },
+    {
+        "created_at": "Tue Mar 19 16:23:37 +0000 2019",
+        "favorite_count": 12,
+        "hashtags": [
+            {
+                "text": "DzienBezMiesa"
+            },
+            {
+                "text": "MeatOutDay"
+            }
+        ],
+        "id": 1108041345363517440,
+        "id_str": "1108041345363517440",
+        "lang": "pl",
+        "retweet_count": 4,
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "Dieta ro\u015blinna zmniejsza ryzyko cukrzycy typu 2 o 40%. #DzienBezMiesa\n#MeatOutDay",
+        "urls": [],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": []
+    },
+    {
+        "created_at": "Tue Mar 19 16:23:23 +0000 2019",
+        "favorite_count": 6,
+        "hashtags": [],
+        "id": 1108041284055379968,
+        "id_str": "1108041284055379968",
+        "lang": "pl",
+        "retweet_count": 1,
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "5 milion\u00f3w przedwczesnych \u015bmierci rocznie uda\u0142oby si\u0119 unikn\u0105\u0107 na ca\u0142ym\n\u015bwiecie, gdyby\u015bmy wszyscy ograniczyli spo\u017cyc\u2026 https://t.co/oNRjtAOf4B",
+        "truncated": true,
+        "urls": [
+            {
+                "expanded_url": "https://twitter.com/i/web/status/1108041284055379968",
+                "url": "https://t.co/oNRjtAOf4B"
+            }
+        ],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": []
+    },
+    {
+        "created_at": "Tue Mar 19 16:23:04 +0000 2019",
+        "favorite_count": 2,
+        "hashtags": [],
+        "id": 1108041207513579525,
+        "id_str": "1108041207513579525",
+        "lang": "pl",
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "text": "W Europie Zachodniej przeci\u0119tne spo\u017cycie mi\u0119sa wynosi 85kg/rok. To dwa razy\nwi\u0119cej od \u015bredniej \u015bwiatowej i ponad pi\u2026 https://t.co/QRrNH2lhVv",
+        "truncated": true,
+        "urls": [
+            {
+                "expanded_url": "https://twitter.com/i/web/status/1108041207513579525",
+                "url": "https://t.co/QRrNH2lhVv"
+            }
+        ],
+        "user": {
+            "id": 323177351,
+            "id_str": "323177351"
+        },
+        "user_mentions": []
+    }
+]

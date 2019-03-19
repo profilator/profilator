@@ -1,19 +1,26 @@
-from twitter import Api
+from twitter import Status
+from collections.abc import Iterable
 
 
 class UserTimelineStatistics(object):
     # tutaj wrzucamy metody służące do zbierania podstawowych statystyk użytkownika
 
     def replies_count(self, timeline):
-        replies = 0
         # zwraca ile spośród wpisów użytkownika to odpowiedzi
+        replies = 0
         for status in timeline:
-            if "in_reply_to_status_id" in status.asDict():
+            if not isinstance(status, Status):
+                raise TypeError("Expected Status class instance, got %s" % type(status))
+            if "in_reply_to_status_id" in status.AsDict():
                 replies += 1
         return replies
 
     def replies_percentage(self, timeline):
         # zwraca procent odpowiedzi spośród wszystkich statusów w timeline
+        if not isinstance(timeline, Iterable):
+            raise TypeError("Expected an iterable of Status objects, got %s" % type(timeline))
+        if len(timeline) == 0:
+            raise ValueError("An iterable must not be empty")
         replies = self.replies_count(timeline)
         return replies / len(timeline) * 100
 
