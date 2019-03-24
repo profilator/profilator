@@ -44,5 +44,8 @@ class TestUserTimelineStatistics(TestCase):
 
     def test_average_favourites_with_errors(self):
         # sprawdza działanie w/w metody w przypadku podania błędnych danych
-        self.assertRaises(TypeError, self.stats.average_favourites, [{"favorite_count", "kalafior"}])
+        with open("test_average_favorites.json", "r") as file:
+            favourites_with_error = json.load(file)
+            favourites_with_error = [Status.NewFromJsonDict(status) for status in favourites_with_error]
 
+        self.assertRaises(TypeError, self.stats.average_favourites, favourites_with_error)
