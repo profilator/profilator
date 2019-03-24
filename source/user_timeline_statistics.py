@@ -1,6 +1,9 @@
 from twitter import Status
 from collections.abc import Iterable
 import collections as col
+import numpy as np
+from sklearn.cluster import KMeans
+from sklearn import metrics
 
 
 class UserTimelineStatistics(object):
@@ -67,14 +70,42 @@ class UserTimelineStatistics(object):
         # Zwraca listę zawierajacą godziny, o jakich były dodawane posty oraz liczby postów dodanych o każdej godzinie, posortwoaną wg liczby postów.
         # Drugi argument to liczba elementów, jakie mają zostać zwrócone. Domyślnie zwraca całą listę.
         hour_hist = col.Counter()
-        for val in timeline:
-            hour_hist[int(val.created_at[11:13])] += 1
+        for post in timeline:
+            if not isinstance(post, Status):
+                raise TypeError("Expected Status class instance, got %s" % type(post))
+            else:
+                hour_hist[int(post.created_at[11:13])] += 1
         return hour_hist.most_common(n)
 
     def avg_hour(timeline):
         # Zwraca średnią z godzin, o jakich były dodawane posty.
-        a = 0; n = 0
-        for val in timeline:
-            a += int(val.created_at[11:13])
+        sum = 0; n = 0
+        if not isinstance(timeline, Iterable):
+            raise TypeError("Expected an iterable of Status objects, got %s" % type(timeline))
+        if len(timeline) == 0:
+            raise ValueError("An iterable must not be empty")
+
+        for post in timeline:
+            sum += int(post.created_at[11:13])
             n += 1
-        return a/n;
+        return sum/n;
+
+    def KMeans_clusters(timeline):
+        # Zwraca liczbę klastrów, dla której przy użyciu algorymu KMeans współczynnik Silhouette jest największy
+        hour_list = [] # lista godzin dodawania tweetów
+        for post in timeline:
+            if not isinstance(post, Status):
+                raise TypeError("Expected Status class instance, got %s" % type(post))
+            minutes = int(post.created_at[11:13])*60 + int(post.created_at[14:16]) # godzina dodania tweeta przeliczona na liczbę minut, jaka upłynęła od północy
+            hour_list.append(minutes)
+        hour_list = np.reshape(hour_list, (-1, 1)) # zamiana listy na tablicę dwuwymiarową
+
+        max_score = 0
+        for k in range(2, 20): # pętla, w której obliczany jest silhouette score dla każdej liczby klastrów z zakresu
+            model = KMeans(n_clusters=k).fit(hour_list)
+            clusters = model.predict(hour_list)
+            score = metrics.silhouette_score(hour_list, clusters);
+            if score>max_score: # wyznaczanie maksymalnego silhouette score
+                max_score = score
+                max = k
+        return max
