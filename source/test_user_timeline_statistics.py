@@ -49,3 +49,24 @@ class TestUserTimelineStatistics(TestCase):
             favourites_with_error = [Status.NewFromJsonDict(status) for status in favourites_with_error]
 
         self.assertRaises(TypeError, self.stats.average_favourites, favourites_with_error)
+        
+    def test_hours_count_with_errors(self):
+        # sprawdza działanie w/w metody w przypadku podania błędnych danych
+        self.assertRaises(TypeError, self.stats.replies_count, 43)
+        self.assertRaises(TypeError, self.stats.replies_count, True)
+        self.assertRaises(TypeError, self.stats.replies_count, "ananas")
+        self.assertRaises(TypeError, self.stats.replies_count, [21, False, "szpinak"])
+        
+    def test_avg_hour_with_errors(self):
+        # sprawdza działanie w/w metody w przypadku podania błędnych danych
+        self.assertRaises(TypeError, self.stats.replies_count, 43)
+        self.assertRaises(TypeError, self.stats.replies_count, True)
+        self.assertRaises(TypeError, self.stats.replies_count, "ananas")
+        self.assertRaises(TypeError, self.stats.replies_count, [21, False, "szpinak"])
+        
+    def test_KMeans_clusters_with_errors(self):
+        # sprawdza działanie w/w metody w przypadku podania błędnych danych
+        self.assertRaises(TypeError, self.stats.replies_count, 43)
+        self.assertRaises(TypeError, self.stats.replies_count, True)
+        self.assertRaises(TypeError, self.stats.replies_count, "ananas")
+        self.assertRaises(TypeError, self.stats.replies_count, [21, False, "szpinak"])
