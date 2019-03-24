@@ -36,3 +36,13 @@ class TestUserTimelineStatistics(TestCase):
         self.assertRaises(TypeError, self.stats.replies_percentage, False)
         self.assertRaises(TypeError, self.stats.replies_percentage, "rzepa")
         self.assertRaises(TypeError, self.stats.replies_percentage, [True, 39, "marchew"])
+
+    def test_average_favourites(self):
+        # sprawdza działanie w/w metody w przypadku podania prawidłowych danych i zbioru pustego
+        self.assertAlmostEqual(self.stats.average_favourites(self.timeline), 20/39)
+        self.assertEqual(self.stats.average_favourites([]), 0)
+
+    def test_average_favourites_with_errors(self):
+        # sprawdza działanie w/w metody w przypadku podania błędnych danych
+        self.assertRaises(TypeError, self.stats.average_favourites, [{"favorite_count", "kalafior"}])
+
