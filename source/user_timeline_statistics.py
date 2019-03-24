@@ -31,7 +31,7 @@ class UserTimelineStatistics(object):
         for k in timeline:
             days[k.created_at[:3]] += 1
         return days
-    
+
     def most_active_day(self, timeline):
         # zwraca dzień, w którym pojawiło się najwięcej postów
         # mad - most active day
@@ -48,10 +48,20 @@ class UserTimelineStatistics(object):
         # zwraca średnią ilość ulubionych pod postami użytkownika
         total_likes = 0
         posts = 0
+        if not isinstance(timeline, Iterable):
+            raise TypeError("Expected an iterable of Status objects, got %s" % type(timeline))
+
         for post in timeline:
-            total_likes += post["favorite_count"]
+            if post.favorite_count:
+                if isinstance(post.favorite_count, int):
+                    total_likes += post.favorite_count
+                else:
+                    raise TypeError("Expected an integer, got %s" % type(post.favorite_count))
             posts += 1
-        return posts / total_likes
+        if total_likes == 0:
+            return 0
+        else:
+            return posts / total_likes
 
     def hours_count(timeline, n = None):
         # Zwraca listę zawierajacą godziny, o jakich były dodawane posty oraz liczby postów dodanych o każdej godzinie, posortwoaną wg liczby postów.
