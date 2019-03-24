@@ -1,4 +1,5 @@
 # profilator
+[![Build Status](https://travis-ci.org/profilator/profilator.svg?branch=master)](https://travis-ci.org/profilator/profilator)
 
 ### To do
 Stworzyłem podstawowy plik main, którym odpalamy program i stworzyłem klasę do statystyk, w której utwórzcie wasze metody. Plik z tokenem dostaniecie przez inne źródło niż GitHub i POD ŻADNYM POZOREM nie wrzucajcie go na githuba. Dodałem go w pliku gitignore więc nie powinno być z tym problemu. 
