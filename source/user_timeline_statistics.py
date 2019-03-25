@@ -109,3 +109,5 @@ class UserTimelineStatistics(object):
                 max_score = score
                 max = k
         return max
+		
+		# komentarz
