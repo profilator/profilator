@@ -37,6 +37,11 @@ class TestUserTimelineStatistics(TestCase):
         self.assertRaises(TypeError, self.stats.replies_percentage, "rzepa")
         self.assertRaises(TypeError, self.stats.replies_percentage, [True, 39, "marchew"])
 
+    def test_day_counter(self):
+        # sprawdza działanie w/w metody w przypadku podania poprawych danych i zbioru pustego
+        self.assertEqual(self.stats.day_counter(self.timeline), {'Thu': 3, 'Wed': 3, 'Sat': 2, 'Sun': 1, 'Tue': 1})
+        self.assertEqual(self.stats.day_counter([]), TypeError)
+
     def test_average_favourites(self):
         # sprawdza działanie w/w metody w przypadku podania prawidłowych danych i zbioru pustego
         self.assertAlmostEqual(self.stats.average_favourites(self.timeline), 20/39)
@@ -70,3 +75,36 @@ class TestUserTimelineStatistics(TestCase):
         self.assertRaises(TypeError, self.stats.replies_count, True)
         self.assertRaises(TypeError, self.stats.replies_count, "ananas")
         self.assertRaises(TypeError, self.stats.replies_count, [21, False, "szpinak"])
+
+    def test_day_counter(self):
+        # sprawdza działanie w/w metody w przypadku podania poprawych danych
+        self.assertEqual(self.stats.day_counter(self.timeline), {'Tue': 20})
+
+    def test_day_counter_with_errors(self):
+        # sprawdza działanie w/w metody w przypadku podania błędnych danych
+        self.assertRaises(TypeError, self.stats.day_counter, 43)
+        self.assertRaises(TypeError, self.stats.day_counter, True)
+        self.assertRaises(TypeError, self.stats.day_counter, "ananas")
+        self.assertRaises(TypeError, self.stats.day_counter, [21, False, "szpinak"])
+
+    def test_most_active_day(self):
+        # sprawdza działanie w/w metody w przypadku podania poprawych danych
+        self.assertEqual(self.stats.most_active_day(self.timeline), 'Tue')
+
+    def test_most_active_day_with_errors(self):
+        # sprawdza działanie w/w metody w przypadku podania błędnych danych
+        self.assertRaises(TypeError, self.stats.most_active_day, 43)
+        self.assertRaises(TypeError, self.stats.most_active_day, True)
+        self.assertRaises(TypeError, self.stats.most_active_day, "ananas")
+        self.assertRaises(TypeError, self.stats.most_active_day, [21, False, "szpinak"])
+
+    def test_KMeans_day_clusters(self):
+        # sprawdza działanie w/w metody w przypadku podania poprawych danych
+        self.assertEqual(self.stats.most_active_day(self.timeline), 'Tue')
+
+    def test_KMeans_day_clusters_with_errors(self):
+        # sprawdza działanie w/w metody w przypadku podania błędnych danych
+        self.assertRaises(TypeError, self.stats.most_active_day, 43)
+        self.assertRaises(TypeError, self.stats.most_active_day, True)
+        self.assertRaises(TypeError, self.stats.most_active_day, "ananas")
+        self.assertRaises(TypeError, self.stats.most_active_day, [21, False, "szpinak"])

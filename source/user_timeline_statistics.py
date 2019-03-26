@@ -30,6 +30,10 @@ class UserTimelineStatistics(object):
 
     def day_counter(self, timeline):
         # zwraca słownik zawierający ilość postów, które dodano w określonych dniach tygodnia
+        if not isinstance(timeline, Iterable):
+            raise TypeError("Expected an iterable of Status objects, got %s" % type(timeline))
+        if len(timeline) == 0:
+            raise ValueError("An iterable must not be empty")
         days = col.Counter()
         for k in timeline:
             days[k.created_at[:3]] += 1
@@ -109,5 +113,43 @@ class UserTimelineStatistics(object):
                 max_score = score
                 max = k
         return max
-		
+
+    def KMeans_day_clusters(self, timeline):
+
+        # Dziekuję Olek - bez twojej funkcji klasteryzującej pewnie nie udało by mi się tego zrobić :))
+        
+        # Zwraca liczbę klastrów, dla której przy użyciu algorymu KMeans współczynnik Silhouette jest największy dla dni tygodnia
+        day_list = [] # lista dni dodawania tweetów          
+
+        for post in timeline:
+            if not isinstance(post, Status):
+                raise TypeError("Expected Status class instance, got %s" % type(post))
+            if (post.created_at[:3] == 'Mon'):
+                day_list.append(1)
+            if (post.created_at[:3] == 'Tue'):
+                day_list.append(2)
+            if (post.created_at[:3] == 'Wed'):
+                day_list.append(3)
+            if (post.created_at[:3] == 'Thu'):
+                day_list.append(4)
+            if (post.created_at[:3] == 'Fri'):
+                day_list.append(5)
+            if (post.created_at[:3] == 'Sat'):
+                day_list.append(6)
+            if (post.created_at[:3] == 'Sun'):
+                day_list.append(7)
+                
+        day_list = np.reshape(day_list, (-1,1))
+
+        max_score = 0
+        for k in range(2,6): # pętla, w której obliczany jest silhouette score dla każdej liczby klastrów z zakresu
+            model = KMeans(n_clusters=k).fit(day_list)
+            clusters = model.predict(day_list)
+            score = metrics.silhouette_score(day_list, clusters);
+            if score > max_score: # wyznaczanie maksymalnego silhouette score
+                max_score = score
+                max = k
+                
+        return max;
+    
 		# komentarz
