@@ -37,11 +37,6 @@ class TestUserTimelineStatistics(TestCase):
         self.assertRaises(TypeError, self.stats.replies_percentage, "rzepa")
         self.assertRaises(TypeError, self.stats.replies_percentage, [True, 39, "marchew"])
 
-    def test_day_counter(self):
-        # sprawdza działanie w/w metody w przypadku podania poprawych danych i zbioru pustego
-        self.assertEqual(self.stats.day_counter(self.timeline), {'Thu': 3, 'Wed': 3, 'Sat': 2, 'Sun': 1, 'Tue': 1})
-        self.assertEqual(self.stats.day_counter([]), TypeError)
-
     def test_average_favourites(self):
         # sprawdza działanie w/w metody w przypadku podania prawidłowych danych i zbioru pustego
         self.assertAlmostEqual(self.stats.average_favourites(self.timeline), 20/39)
