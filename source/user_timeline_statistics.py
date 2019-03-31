@@ -70,9 +70,9 @@ class UserTimelineStatistics(object):
         else:
             return total_likes / posts
 
-    def hours_count(timeline, n = None):
+    def hours_count(self, timeline, n = None):
         # Zwraca listę zawierajacą godziny, o jakich były dodawane posty oraz liczby postów dodanych o każdej godzinie, posortwoaną wg liczby postów.
-        # Drugi argument to liczba elementów, jakie mają zostać zwrócone. Domyślnie zwraca całą listę.
+        # Trzeci argument to liczba elementów, jakie mają zostać zwrócone. Domyślnie zwraca całą listę.
         hour_hist = col.Counter()
         for post in timeline:
             if not isinstance(post, Status):
@@ -81,7 +81,7 @@ class UserTimelineStatistics(object):
                 hour_hist[int(post.created_at[11:13])] += 1
         return hour_hist.most_common(n)
 
-    def avg_hour(timeline):
+    def avg_hour(self, timeline):
         # Zwraca średnią z godzin, o jakich były dodawane posty.
         sum = 0; n = 0
         if not isinstance(timeline, Iterable):
@@ -94,8 +94,8 @@ class UserTimelineStatistics(object):
             n += 1
         return sum/n;
 
-    def KMeans_clusters(timeline):
-        # Zwraca liczbę klastrów, dla której przy użyciu algorymu KMeans współczynnik Silhouette jest największy
+    def KMeans_hours_clusters(timeline):
+        # Zwraca liczbę klastrów godzin, dla której przy użyciu algorymu KMeans współczynnik Silhouette jest największy
         hour_list = [] # lista godzin dodawania tweetów
         for post in timeline:
             if not isinstance(post, Status):
