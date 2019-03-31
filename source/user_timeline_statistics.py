@@ -68,7 +68,7 @@ class UserTimelineStatistics(object):
         if total_likes == 0:
             return 0
         else:
-            return posts / total_likes
+            return total_likes / posts
 
     def hours_count(timeline, n = None):
         # Zwraca listę zawierajacą godziny, o jakich były dodawane posty oraz liczby postów dodanych o każdej godzinie, posortwoaną wg liczby postów.
@@ -152,4 +152,21 @@ class UserTimelineStatistics(object):
                 
         return max;
     
-		# komentarz
+    def average_tweet_length(self, timeline):
+    # zwraca srednia dlugosc tweetow
+    tweets_length = 0
+        posts = 0
+        if not isinstance(timeline, Iterable):
+            raise TypeError("Expected an iterable of Status objects, got %s" % type(timeline))
+
+        for post in timeline:
+            if post.text:
+                if isinstance(post.text, string):
+                    tweets_length += len(text.split())
+                else:
+                    raise TypeError("Expected a string, got %s" % type(post.text))
+            posts += 1
+        if tweets_length == 0:
+            return 0
+        else:
+            return tweets_length / posts
