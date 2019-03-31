@@ -49,27 +49,37 @@ class TestUserTimelineStatistics(TestCase):
             favourites_with_error = [Status.NewFromJsonDict(status) for status in favourites_with_error]
 
         self.assertRaises(TypeError, self.stats.average_favourites, favourites_with_error)
-        
+
+    def test_hours_count(self):
+        # sprawdza działanie w/w metody w przypadku podania prawidłowych danych i zbioru pustego
+#        self.assertAlmostEqual(self.stats.hours_count(self.timeline), [(9, 20)])
+        self.assertAlmostEqual(self.stats.hours_count([]), [])
+
     def test_hours_count_with_errors(self):
         # sprawdza działanie w/w metody w przypadku podania błędnych danych
-        self.assertRaises(TypeError, self.stats.replies_count, 43)
-        self.assertRaises(TypeError, self.stats.replies_count, True)
-        self.assertRaises(TypeError, self.stats.replies_count, "ananas")
-        self.assertRaises(TypeError, self.stats.replies_count, [21, False, "szpinak"])
-        
+        self.assertRaises(TypeError, self.stats.hours_count, 43)
+        self.assertRaises(TypeError, self.stats.hours_count, True)
+        self.assertRaises(TypeError, self.stats.hours_count, "ananas")
+        self.assertRaises(TypeError, self.stats.hours_count, [21, False, "szpinak"])
+
+#    def test_avg_hour(self):
+        # sprawdza działanie w/w metody w przypadku podania prawidłowych danych
+#        self.assertAlmostEqual(self.stats.avg_hour(self.timeline), 9)
+
     def test_avg_hour_with_errors(self):
         # sprawdza działanie w/w metody w przypadku podania błędnych danych
-        self.assertRaises(TypeError, self.stats.replies_count, 43)
-        self.assertRaises(TypeError, self.stats.replies_count, True)
-        self.assertRaises(TypeError, self.stats.replies_count, "ananas")
-        self.assertRaises(TypeError, self.stats.replies_count, [21, False, "szpinak"])
+        self.assertRaises(TypeError, self.stats.avg_hour, 43)
+        self.assertRaises(TypeError, self.stats.avg_hour, True)
+        self.assertRaises(AttributeError, self.stats.avg_hour, "ananas")
+        self.assertRaises(AttributeError, self.stats.avg_hour, [21, False, "szpinak"])
+        self.assertRaises(ValueError, self.stats.avg_hour, [])
         
-    def test_KMeans_clusters_with_errors(self):
+    def test_KMeans_hours_clusters_with_errors(self):
         # sprawdza działanie w/w metody w przypadku podania błędnych danych
-        self.assertRaises(TypeError, self.stats.replies_count, 43)
-        self.assertRaises(TypeError, self.stats.replies_count, True)
-        self.assertRaises(TypeError, self.stats.replies_count, "ananas")
-        self.assertRaises(TypeError, self.stats.replies_count, [21, False, "szpinak"])
+        self.assertRaises(TypeError, self.stats.KMeans_hours_clusters, 43)
+        self.assertRaises(TypeError, self.stats.KMeans_hours_clusters, True)
+        self.assertRaises(TypeError, self.stats.KMeans_hours_clusters, "ananas")
+        self.assertRaises(TypeError, self.stats.KMeans_hours_clusters, [21, False, "szpinak"])
 
     def test_day_counter(self):
         # sprawdza działanie w/w metody w przypadku podania poprawych danych
