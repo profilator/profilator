@@ -154,7 +154,7 @@ class UserTimelineStatistics(object):
     
     def average_tweet_length(self, timeline):
     # zwraca srednia dlugosc tweetow
-    tweets_length = 0
+        tweets_length = 0
         posts = 0
         if not isinstance(timeline, Iterable):
             raise TypeError("Expected an iterable of Status objects, got %s" % type(timeline))

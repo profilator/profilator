@@ -52,7 +52,7 @@ class TestUserTimelineStatistics(TestCase):
 
     def test_hours_count(self):
         # sprawdza działanie w/w metody w przypadku podania prawidłowych danych i zbioru pustego
-#        self.assertAlmostEqual(self.stats.hours_count(self.timeline), [(9, 20)])
+        self.assertAlmostEqual(self.stats.hours_count(self.timeline), [(16, 18), (17, 2)])
         self.assertAlmostEqual(self.stats.hours_count([]), [])
 
     def test_hours_count_with_errors(self):
@@ -62,9 +62,9 @@ class TestUserTimelineStatistics(TestCase):
         self.assertRaises(TypeError, self.stats.hours_count, "ananas")
         self.assertRaises(TypeError, self.stats.hours_count, [21, False, "szpinak"])
 
-#    def test_avg_hour(self):
+    def test_avg_hour(self):
         # sprawdza działanie w/w metody w przypadku podania prawidłowych danych
-#        self.assertAlmostEqual(self.stats.avg_hour(self.timeline), 9)
+        self.assertAlmostEqual(self.stats.avg_hour(self.timeline), 322/20)
 
     def test_avg_hour_with_errors(self):
         # sprawdza działanie w/w metody w przypadku podania błędnych danych
