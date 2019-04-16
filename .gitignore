@@ -111,3 +111,6 @@ tokens/
 
 #pycharm files
 .idea/*
+
+env
+

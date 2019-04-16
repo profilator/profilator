@@ -17,3 +17,4 @@ Aby przygotować sobie środowisko wystarczy użyć pipa komendą:
 pip3 install -r requirements.txt 
 ```
 w folderze z plikiem requirements txt. Zalecam zapoznanie się i używanie virtualenv, ale nie jest to konieczne.
+
