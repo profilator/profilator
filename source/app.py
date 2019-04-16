@@ -24,6 +24,30 @@ api = Api(consumer_key=tokens["consumer_key"],
 timeline = api.GetUserTimeline(screen_name="AndrzejDuda", count=200, trim_user=True)
 
 
+def create_replies_graph(t):
+    stats = UserTimelineStatistics()
+    replies = stats.replies_count(t)
+
+    x = {
+        "posts": len(t) - replies,
+        "replies": replies,
+    }
+
+    data = pd.Series(x).reset_index(name="value").rename(columns={"index": "tweet_type"})
+    data["angle"] = data["value"] / data["value"].sum() * 2 * pi
+    data["color"] = ["#6d91e8", "#8e57c1"]
+
+    p = figure(plot_height=350, title="Replies Count", toolbar_location=None,
+               tools="hover", tooltips="@tweet_type: @value", x_range=(-0.5, 1.0))
+    p.wedge(x=0, y=1, radius=0.4, start_angle=cumsum("angle", include_zero=True),
+            end_angle=cumsum("angle"), line_color="white", fill_color='color',
+            legend="tweet_type", source=data)
+    p.axis.axis_label = None
+    p.axis.visible = False
+    p.grid.grid_line_color = None
+    return p
+
+
 @app.route("/")
 def index():
     return "Hello, World!"
@@ -32,28 +56,7 @@ def index():
 @app.route("/bokeh")
 def bokeh():
 
-    stats = UserTimelineStatistics()
-    replies = stats.replies_count(timeline)
-
-    x = {
-        "replies": replies,
-        "posts": len(timeline) - replies
-    }
-
-    data = pd.Series(x).reset_index(name="value").rename(columns={"index": "tweet_type"})
-    data["angle"] = data["value"]/data["value"].sum() * 2 * pi
-    data["color"] = ["#8e57c1", "#6d91e8"]
-
-    p=figure(plot_height=350, title="Replies Count", toolbar_location=None,
-             tools="hover", tooltips="@tweet_type: @value", x_range=(-0.5, 1.0))
-    p.wedge(x=0, y=1, radius=0.4, start_angle=cumsum("angle", include_zero=True),
-            end_angle=cumsum("angle"), line_color="white", fill_color='color',
-            legend="tweet_type", source=data)
-    p.axis.axis_label = None
-    p.axis.visible = False
-    p.grid.grid_line_color = None
-
-    script, div = components(p)
+    replies_script, replies_div = components(create_replies_graph(timeline))
 
     # grab the static resources
     js_resources = INLINE.render_js()
@@ -62,8 +65,8 @@ def bokeh():
     # render template
     html = render_template(
         "index.html",
-        plot_script=script,
-        plot_div=div,
+        replies_script=replies_script,
+        replies_div=replies_div,
         js_resources=js_resources,
         css_resources=css_resources,
     )
