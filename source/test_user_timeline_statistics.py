@@ -39,7 +39,7 @@ class TestUserTimelineStatistics(TestCase):
 
     def test_average_favourites(self):
         # sprawdza działanie w/w metody w przypadku podania prawidłowych danych i zbioru pustego
-        self.assertAlmostEqual(self.stats.average_favourites(self.timeline), 20/39)
+        self.assertAlmostEqual(self.stats.average_favourites(self.timeline), 39/20)
         self.assertEqual(self.stats.average_favourites([]), 0)
 
     def test_average_favourites_with_errors(self):
