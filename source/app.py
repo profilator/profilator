@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from bokeh.embed import components
 from bokeh.transform import cumsum
-from bokeh.plotting import figure
+from bokeh.plotting import figure, ColumnDataSource
 from bokeh.resources import INLINE
 from bokeh.util.string import encode_utf8
 from source.user_timeline_statistics import UserTimelineStatistics
@@ -56,9 +56,22 @@ def create_favorites_graph(t, bins):
     m = max(hist)
     colors = ["#6d91e8" if v != m else "#8e57c1" for v in hist]
 
+    source = ColumnDataSource(data=dict(
+        left=bin_edges[:-1],
+        right=bin_edges[1:],
+        top=hist,
+        bottom=[0 for x in range(len(hist))],
+        colors=colors
+    ))
+
+    tooltips = [
+        ("Favorites range", "<@left{0,0}; @right{0,0})"),
+        ("Tweets", "@top")
+    ]
+
     p = figure(plot_height=350, title="Favorites", toolbar_location="right",
-               x_axis_label="Favorites count", y_axis_label="Number of tweets")
-    p.quad(left=bin_edges[:-1], right=bin_edges[1:], top=hist, bottom=0, fill_color=colors)
+               x_axis_label="Favorites count", y_axis_label="Number of tweets", tooltips=tooltips)
+    p.quad("left", "right", "top", "bottom", fill_color="colors", source=source)
     return p
 
 
