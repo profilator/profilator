@@ -50,12 +50,14 @@ def create_replies_graph(t):
 
 @app.route("/")
 def index():
-    return "Hello, World!"
+    html = render_template(
+        "index.html"
+    )
+    return encode_utf8(html)
 
 
-@app.route("/bokeh")
-def bokeh():
-
+@app.route("/report")
+def report():
     replies_script, replies_div = components(create_replies_graph(timeline))
 
     # grab the static resources
@@ -64,7 +66,7 @@ def bokeh():
 
     # render template
     html = render_template(
-        "index.html",
+        "report.html",
         replies_script=replies_script,
         replies_div=replies_div,
         js_resources=js_resources,
