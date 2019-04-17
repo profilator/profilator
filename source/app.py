@@ -7,6 +7,7 @@ from bokeh.util.string import encode_utf8
 from source.user_timeline_statistics import UserTimelineStatistics
 from twitter import Api
 from math import pi
+from numpy import histogram
 import pandas as pd
 import json
 
@@ -25,6 +26,7 @@ timeline = api.GetUserTimeline(screen_name="AndrzejDuda", count=200, trim_user=T
 
 
 def create_replies_graph(t):
+    # tworzy wykres kołowy przedstawiający ilość odpowiedzi
     stats = UserTimelineStatistics()
     replies = stats.replies_count(t)
 
@@ -48,6 +50,18 @@ def create_replies_graph(t):
     return p
 
 
+def create_favorites_graph(t, bins):
+    # tworzy histogram polubień
+    hist, bin_edges = histogram([post.favorite_count for post in t], bins=bins)
+    m = max(hist)
+    colors = ["#6d91e8" if v != m else "#8e57c1" for v in hist]
+
+    p = figure(plot_height=350, title="Favorites", toolbar_location="right",
+               x_axis_label="Favorites count", y_axis_label="Number of tweets")
+    p.quad(left=bin_edges[:-1], right=bin_edges[1:], top=hist, bottom=0, fill_color=colors)
+    return p
+
+
 @app.route("/")
 def index():
     return "Hello, World!"
@@ -57,6 +71,7 @@ def index():
 def bokeh():
 
     replies_script, replies_div = components(create_replies_graph(timeline))
+    favorites_script, favorites_div = components(create_favorites_graph(timeline, 10))
 
     # grab the static resources
     js_resources = INLINE.render_js()
@@ -67,9 +82,12 @@ def bokeh():
         "index.html",
         replies_script=replies_script,
         replies_div=replies_div,
+        favorites_script=favorites_script,
+        favorites_div=favorites_div,
         js_resources=js_resources,
         css_resources=css_resources,
     )
+
     return encode_utf8(html)
 
 
