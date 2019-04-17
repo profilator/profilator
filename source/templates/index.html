@@ -2,14 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Bokeh Sample</title>
-    {{ js_resources|indent(4)|safe }}
-    {{ css_resources|indent(4)|safe }}
-    {{ replies_script|indent(4)|safe }}
-    {{ favorites_script|indent(4)|safe }}
+    <title>profilator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
   </head>
   <body>
-    {{ replies_div|indent(4)|safe }}
-    {{ favorites_div|indent(4)|safe }}
+    <h1>Hello world!</h1>
   </body>
 </html>

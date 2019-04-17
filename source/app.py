@@ -64,12 +64,14 @@ def create_favorites_graph(t, bins):
 
 @app.route("/")
 def index():
-    return "Hello, World!"
+    html = render_template(
+        "index.html"
+    )
+    return encode_utf8(html)
 
 
-@app.route("/bokeh")
-def bokeh():
-
+@app.route("/report")
+def report():
     replies_script, replies_div = components(create_replies_graph(timeline))
     favorites_script, favorites_div = components(create_favorites_graph(timeline, 10))
 
@@ -79,7 +81,7 @@ def bokeh():
 
     # render template
     html = render_template(
-        "index.html",
+        "report.html",
         replies_script=replies_script,
         replies_div=replies_div,
         favorites_script=favorites_script,
