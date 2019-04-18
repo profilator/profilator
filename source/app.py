@@ -4,7 +4,8 @@ from bokeh.transform import cumsum
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.resources import INLINE
 from bokeh.util.string import encode_utf8
-from source.user_timeline_statistics import UserTimelineStatistics
+from bokeh.models import NumeralTickFormatter
+from user_timeline_statistics import UserTimelineStatistics
 from twitter import Api
 from math import pi
 from numpy import histogram
@@ -22,7 +23,7 @@ api = Api(consumer_key=tokens["consumer_key"],
           access_token_key=tokens["access_token_key"],
           access_token_secret=tokens["access_token_secret"])
 
-timeline = api.GetUserTimeline(screen_name="AndrzejDuda", count=200, trim_user=True)
+timeline = api.GetUserTimeline(screen_name="realDonaldTrump", count=200, trim_user=True)
 
 
 def create_replies_graph(t):
@@ -53,6 +54,7 @@ def create_replies_graph(t):
 def create_favorites_graph(t, bins):
     # tworzy histogram polubień
     hist, bin_edges = histogram([post.favorite_count for post in t], bins=bins)
+    bin_edges = [round(i) for i in bin_edges]
     m = max(hist)
     colors = ["#6d91e8" if v != m else "#8e57c1" for v in hist]
 
@@ -72,6 +74,12 @@ def create_favorites_graph(t, bins):
     p = figure(plot_height=350, title="Favorites", toolbar_location="right",
                x_axis_label="Favorites count", y_axis_label="Number of tweets", tooltips=tooltips)
     p.quad("left", "right", "top", "bottom", fill_color="colors", source=source)
+    p.xaxis.ticker = bin_edges
+
+    if bin_edges[-1] >= 100000:
+        p.xaxis.major_label_orientation = pi/4
+        p.xaxis.formatter = NumeralTickFormatter(format="0,0")
+
     return p
 
 
