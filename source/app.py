@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from bokeh.embed import components
 from bokeh.transform import cumsum
 from bokeh.plotting import figure, ColumnDataSource
@@ -22,9 +22,6 @@ api = Api(consumer_key=tokens["consumer_key"],
           consumer_secret=tokens["consumer_secret"],
           access_token_key=tokens["access_token_key"],
           access_token_secret=tokens["access_token_secret"])
-
-timeline = api.GetUserTimeline(screen_name="realDonaldTrump", count=200, trim_user=True)
-
 
 def create_replies_graph(t):
     # tworzy wykres kołowy przedstawiający ilość odpowiedzi
@@ -93,6 +90,10 @@ def index():
 
 @app.route("/report")
 def report():
+    nickname = request.args.get('nickname')
+
+    timeline = api.GetUserTimeline(screen_name=nickname, count=200, trim_user=True)
+
     replies_script, replies_div = components(create_replies_graph(timeline))
     favorites_script, favorites_div = components(create_favorites_graph(timeline, 10))
 
@@ -103,6 +104,7 @@ def report():
     # render template
     html = render_template(
         "report.html",
+        nickname=nickname,
         replies_script=replies_script,
         replies_div=replies_div,
         favorites_script=favorites_script,
