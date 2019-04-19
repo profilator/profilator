@@ -9,7 +9,7 @@
     {{ js_resources|indent(4)|safe }}
     {{ replies_script|indent(4)|safe }}
     {{ favorites_script|indent(4)|safe }}
-	{{ posts_in_days_script|indent(4)|safe }}
+    {{ posts_in_days_script|indent(4)|safe }}
     <title>profilator</title>
   </head>
   <body>
@@ -24,15 +24,9 @@
     <main class="content">
       <h1>@{{ nickname }}</h1>
       <section>
-        <article class="block">
-          {{ replies_div|indent(4)|safe }}
-        </article>
-        <article class="block">
-          {{ favorites_div|indent(4)|safe }}
-        </article>
-		<article class="block">
-          {{ posts_in_days_div|indent(4)|safe }}
-        </article>
+        {{ favorites_div|indent(4)|safe }}
+        {{ posts_in_days_div|indent(4)|safe }}
+        {{ replies_div|indent(4)|safe }}
       </section>
     </main>
     <footer class="footer">

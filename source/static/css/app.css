@@ -52,10 +52,22 @@ form > input{
 }
 
 .content{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-self: center;
   flex: 1;
-  max-width: 750px;
-  width: 75%;
+  max-width: 950px;
+}
+
+.content section{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.content section div{
+  margin: 0.5em;
 }
 
 .index-main-text{

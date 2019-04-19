@@ -22,7 +22,7 @@ api = Api(consumer_key=tokens["consumer_key"],
           consumer_secret=tokens["consumer_secret"],
           access_token_key=tokens["access_token_key"],
           access_token_secret=tokens["access_token_secret"])
-		  
+
 account = UserTimelineStatistics()
 
 def create_replies_graph(t):
@@ -37,9 +37,9 @@ def create_replies_graph(t):
 
     data = pd.Series(x).reset_index(name="value").rename(columns={"index": "tweet_type"})
     data["angle"] = data["value"] / data["value"].sum() * 2 * pi
-    data["color"] = ["#6d91e8", "#8e57c1"]
+    data["color"] = ["#00c4a6", "#007fc4"]
 
-    p = figure(plot_height=350, title="Replies Count", toolbar_location=None,
+    p = figure(plot_height=300, plot_width=450, title="Replies Count", toolbar_location=None,
                tools="hover", tooltips="@tweet_type: @value", x_range=(-0.5, 1.0))
     p.wedge(x=0, y=1, radius=0.4, start_angle=cumsum("angle", include_zero=True),
             end_angle=cumsum("angle"), line_color="white", fill_color='color',
@@ -55,7 +55,7 @@ def create_favorites_graph(t, bins):
     hist, bin_edges = histogram([post.favorite_count for post in t], bins=bins)
     bin_edges = [round(i) for i in bin_edges]
     m = max(hist)
-    colors = ["#6d91e8" if v != m else "#8e57c1" for v in hist]
+    colors = ["#00c4a6" if v != m else "#007fc4" for v in hist]
 
     source = ColumnDataSource(data=dict(
         left=bin_edges[:-1],
@@ -70,7 +70,7 @@ def create_favorites_graph(t, bins):
         ("Tweets", "@top")
     ]
 
-    p = figure(plot_height=350, title="Favorites", toolbar_location="right",
+    p = figure(plot_height=300, plot_width=450, title="Favorites", toolbar_location="right",
                x_axis_label="Favorites count", y_axis_label="Number of tweets", tooltips=tooltips)
     p.quad("left", "right", "top", "bottom", fill_color="colors", source=source)
     p.xaxis.ticker = bin_edges
@@ -80,7 +80,7 @@ def create_favorites_graph(t, bins):
         p.xaxis.formatter = NumeralTickFormatter(format="0,0")
 
     return p
-	
+
 def create_posts_in_days_graph(t):
     # tworzy wykres słupkowy pokazujący ilość opublikowanych postów w poszczególnych dniach tygodnia
 
@@ -90,9 +90,9 @@ def create_posts_in_days_graph(t):
     for d, posty in days.items():
         lista.append(posty)
 
-    p = figure(plot_height=350, title="Published posts in the days of week", toolbar_location="right",
+    p = figure(plot_height=300, plot_width=450, title="Published posts in the days of week", toolbar_location="right",
                x_axis_label="Days of week", y_axis_label="Number of tweets")
-    p.vbar(x=[1, 2, 3, 4, 5, 6, 7], width=0.5, bottom=0, top=lista, color="firebrick")
+    p.vbar(x=[1, 2, 3, 4, 5, 6, 7], width=0.5, bottom=0, top=lista, color="#007fc4")
     return p
 
 
@@ -113,7 +113,7 @@ def report():
     replies_script, replies_div = components(create_replies_graph(timeline))
     favorites_script, favorites_div = components(create_favorites_graph(timeline, 10))
     posts_in_days_script, posts_in_days_div = components(create_posts_in_days_graph(timeline))
-	
+
     # grab the static resources
     js_resources = INLINE.render_js()
     css_resources = INLINE.render_css()
@@ -126,7 +126,7 @@ def report():
         replies_div=replies_div,
         favorites_script=favorites_script,
         favorites_div=favorites_div,
-	posts_in_days_script=posts_in_days_script,
+        posts_in_days_script=posts_in_days_script,
         posts_in_days_div=posts_in_days_div,
         js_resources=js_resources,
         css_resources=css_resources,
