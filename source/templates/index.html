@@ -2,10 +2,42 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>profilator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" integrity="sha384-l9M6Adwf4b8uYw86eNILi6yzN7Zf4VoTPpB88nLLXbZ11ybFDaLcd/a2MU1EZXyK" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <title>profilator</title>
   </head>
   <body>
-    <h1>Hello world!</h1>
+    <header class="header">
+      <h1>
+        <a href="/">
+          <img src="{{ url_for('static', filename="img/logo.png") }}" class="img-logo">
+          profilator
+        </a>
+      </h1>
+    </header>
+    <main class="content">
+      <article class="block">
+        <p class="index-main-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus velit orci, ultricies ut turpis in, ornare tempus eros.
+        </p>
+      </article>
+      <form class="index-form" action="report">
+        <input type="text" name="nickname" placeholder="andrzejduda" class="input is-primary">
+        <input type="submit" value="&raquo;" class="button is-primary">
+      </form>
+      <article class="block">
+        <p class="index-main-text">
+          Lorem ipsum dolor sit amet.
+        </p>
+      </article>
+      <article class="block">
+        <img src="{{ url_for('static', filename="img/1.png") }}">
+        <img src="{{ url_for('static', filename="img/1.png") }}">
+      </article>
+    </main>
+    <footer class="footer">
+      &copy; 2019
+    </footer>
   </body>
 </html>
