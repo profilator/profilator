@@ -25,6 +25,7 @@ api = Api(consumer_key=tokens["consumer_key"],
 
 account = UserTimelineStatistics()
 
+
 def create_replies_graph(t):
     # tworzy wykres kołowy przedstawiający ilość odpowiedzi
     stats = UserTimelineStatistics()
@@ -81,6 +82,7 @@ def create_favorites_graph(t, bins):
 
     return p
 
+
 def create_posts_in_days_graph(t):
     # tworzy wykres słupkowy pokazujący ilość opublikowanych postów w poszczególnych dniach tygodnia
 
@@ -90,9 +92,12 @@ def create_posts_in_days_graph(t):
     for d, posty in days.items():
         lista.append(posty)
 
+    m = max(lista)
+    colors = ["#00c4a6" if v != m else "#007fc4" for v in lista]
+
     p = figure(plot_height=300, plot_width=450, title="Published posts in the days of week", toolbar_location="right",
-               x_axis_label="Days of week", y_axis_label="Number of tweets")
-    p.vbar(x=[1, 2, 3, 4, 5, 6, 7], width=0.5, bottom=0, top=lista, color="#007fc4")
+               x_axis_label="Day of week", y_axis_label="Number of tweets")
+    p.vbar(x=[i for i in range(1, 8)], width=0.5, bottom=0, top=lista, fill_color=colors)
     return p
 
 
