@@ -127,6 +127,10 @@ def report():
     html = render_template(
         "report.html",
         nickname=nickname,
+        tweets="7,602",
+        following="773",
+        followers="1.01M",
+        likes="28",
         replies_script=replies_script,
         replies_div=replies_div,
         favorites_script=favorites_script,

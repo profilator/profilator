@@ -23,6 +23,24 @@
     </header>
     <main class="content">
       <h1>@{{ nickname }}</h1>
+      <ul class="account-summary-list">
+        <li>
+          <span>{{ tweets }}</span>
+          <span>Tweets</span>
+        </li>
+        <li>
+          <span>{{ following }}</span>
+          <span>Following</span>
+        </li>
+        <li>
+          <span>{{ followers }}</span>
+          <span>Followers</span>
+        </li>
+        <li>
+          <span>{{ likes }}</span>
+          <span>Likes</span>
+        </li>
+      </ul>
       <section>
         {{ favorites_div|indent(4)|safe }}
         {{ posts_in_days_div|indent(4)|safe }}

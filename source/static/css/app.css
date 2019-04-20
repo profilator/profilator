@@ -4,6 +4,7 @@ body{
   color: #3a3431;
   background-color: #fff;
   min-height: 100vh;
+  font-size: 16px;
 }
 
 img{
@@ -54,7 +55,6 @@ form > input{
 .content{
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   align-self: center;
   flex: 1;
   max-width: 950px;
@@ -66,8 +66,10 @@ form > input{
   justify-content: center;
 }
 
-.content section div{
+.content section > div{
   margin: 0.5em;
+  max-width: 100vw;
+  overflow-x: auto;
 }
 
 .index-main-text{
@@ -85,4 +87,30 @@ form > input{
   display: flex;
   margin: 3em 0;
   max-width: 500px;
+}
+
+ul.account-summary-list{
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0 0 1em 0;
+  font-size: 1.5em;
+}
+
+ul.account-summary-list li{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0.5em;
+  color: #3a3431;
+}
+
+ul.account-summary-list li span:first-child{
+  color: #046193;
+}
+
+@media only screen and (max-width:500px){
+  body{
+    font-size: 12px;
+  }
 }
