@@ -1,20 +1,31 @@
 # profilator
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/profilator/profilator.svg?branch=master)](https://travis-ci.org/profilator/profilator)
 
-### To do
-Stworzyłem podstawowy plik main, którym odpalamy program i stworzyłem klasę do statystyk, w której utwórzcie wasze metody. Plik z tokenem dostaniecie przez inne źródło niż GitHub i POD ŻADNYM POZOREM nie wrzucajcie go na githuba. Dodałem go w pliku gitignore więc nie powinno być z tym problemu. 
+Flask application for generating user's Twitter profile report.
 
-Zadania:
- - Obliczenie najczęstszej i średniej godziny, wykaz jakie godziny były używane ile razy – Olek
- - To co wyżej ale dla dni tygodnia – Szymon
- - Średnia długość wpisów – Łukasz
- - Średnia ilość ulubionych – Patryk
+## Installation
 
-Metody powinny zwracać wartości a nie je printować. Proszę o komentowanie kodu, gdyż to dobra praktyka. Jak ktoś miałby pytania to pisać na czacie grupowym.
+First, clone this repository to your local computer:
+```
+git clone https://github.com/profilator/profilator.git
+cd profilator
+```
 
-Aby przygotować sobie środowisko wystarczy użyć pipa komendą:
+Then install the necessary packages with pip:
 ```
 pip3 install -r requirements.txt 
 ```
-w folderze z plikiem requirements txt. Zalecam zapoznanie się i używanie virtualenv, ale nie jest to konieczne.
 
+You may want to use virtualenv to avoid installing dependencies system-wide, like this:
+```
+python -m venv ENV
+source ENV/bin/activate
+pip3 install -r requirements.txt
+```
+
+Next, head to the source folder, and start the dev server on ```localhost:5000```:
+```
+cd source
+python app.py
+```
