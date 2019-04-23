@@ -101,6 +101,31 @@ def create_posts_in_days_graph(t):
     return p
 
 
+def create_posts_in_hours_graph(t):
+    # tworzy wykres słupkowy pokazujący ilość opublikowanych postów w poszczególnych godzinach
+
+    hours = account.hours_count(t)
+    top = []
+    x = []
+
+    for hour, posts in hours.items():
+        top.append(posts)
+        x.append(hour)
+
+    tooltips = [
+        ("Hour", "@x"),
+        ("Tweets", "@top")
+    ]
+
+    m = max(top)
+    colors = ["#00c4a6" if v != m else "#007fc4" for v in top]
+
+    p = figure(plot_height=300, plot_width=450, title="Published posts in hours of a day", toolbar_location="right",
+               x_axis_label="Hours", y_axis_label="Number of tweets", tooltips=tooltips)
+    p.vbar(x=x, width=0.5, bottom=0, top=top, color="#007fc4", fill_color=colors)
+    return p
+
+
 @app.route("/")
 def index():
     html = render_template(
@@ -118,6 +143,7 @@ def report():
     replies_script, replies_div = components(create_replies_graph(timeline))
     favorites_script, favorites_div = components(create_favorites_graph(timeline, 10))
     posts_in_days_script, posts_in_days_div = components(create_posts_in_days_graph(timeline))
+    posts_in_hours_script, posts_in_hours_div = components(create_posts_in_hours_graph(timeline))
 
     # grab the static resources
     js_resources = INLINE.render_js()
@@ -137,6 +163,8 @@ def report():
         favorites_div=favorites_div,
         posts_in_days_script=posts_in_days_script,
         posts_in_days_div=posts_in_days_div,
+        posts_in_hours_script=posts_in_hours_script,
+        posts_in_hours_div=posts_in_hours_div,
         js_resources=js_resources,
         css_resources=css_resources,
     )
