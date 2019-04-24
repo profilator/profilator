@@ -100,6 +100,36 @@ def create_posts_in_days_graph(t):
     p.vbar(x=[i for i in range(1, 8)], width=0.5, bottom=0, top=lista, fill_color=colors)
     return p
 
+def create_length_graph(t, bins):
+    # tworzy histogram dlugosci postow
+    hist, bin_edges = histogram([len(post.text.split()) for post in t], bins=bins)
+    bin_edges = [round(i) for i in bin_edges]
+    m = max(hist)
+    colors = ["#00c4a6" if v != m else "#007fc4" for v in hist]
+
+    source = ColumnDataSource(data=dict(
+        left=bin_edges[:-1],
+        right=bin_edges[1:],
+        top=hist,
+        bottom=[0 for x in range(len(hist))],
+        colors=colors
+    ))
+
+    tooltips = [
+        ("Tweets length", "<@left{0,0}; @right{0,0})"),
+        ("Tweets", "@top")
+    ]
+
+    p = figure(plot_height=300, plot_width=450, title="Length", toolbar_location="right",
+               x_axis_label="Tweets length", y_axis_label="Number of tweets", tooltips=tooltips)
+    p.quad("left", "right", "top", "bottom", fill_color="colors", source=source)
+    p.xaxis.ticker = bin_edges
+
+    if bin_edges[-1] >= 100000:
+        p.xaxis.major_label_orientation = pi/4
+        p.xaxis.formatter = NumeralTickFormatter(format="0,0")
+
+    return p
 
 @app.route("/")
 def index():
@@ -118,6 +148,8 @@ def report():
     replies_script, replies_div = components(create_replies_graph(timeline))
     favorites_script, favorites_div = components(create_favorites_graph(timeline, 10))
     posts_in_days_script, posts_in_days_div = components(create_posts_in_days_graph(timeline))
+    length_script, length_div = components(create_length_graph(timeline, 10))
+
 
     # grab the static resources
     js_resources = INLINE.render_js()
@@ -139,6 +171,8 @@ def report():
         posts_in_days_div=posts_in_days_div,
         js_resources=js_resources,
         css_resources=css_resources,
+        length_script=length_script,
+        length_div=length_div,
     )
 
     return encode_utf8(html)
@@ -146,3 +180,4 @@ def report():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
