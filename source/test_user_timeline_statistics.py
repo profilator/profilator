@@ -1,5 +1,6 @@
 from unittest import TestCase
 import json
+import collections as col
 from user_timeline_statistics import UserTimelineStatistics
 from twitter import Status
 
@@ -52,8 +53,8 @@ class TestUserTimelineStatistics(TestCase):
 
     def test_hours_count(self):
         # sprawdza działanie w/w metody w przypadku podania prawidłowych danych i zbioru pustego
-        self.assertAlmostEqual(self.stats.hours_count(self.timeline), [(16, 18), (17, 2)])
-        self.assertAlmostEqual(self.stats.hours_count([]), [])
+        self.assertEqual(self.stats.hours_count(self.timeline), {16: 18, 17: 2})
+        self.assertEqual(self.stats.hours_count([]), col.Counter())
 
     def test_hours_count_with_errors(self):
         # sprawdza działanie w/w metody w przypadku podania błędnych danych

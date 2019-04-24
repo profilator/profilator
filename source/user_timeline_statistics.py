@@ -70,16 +70,15 @@ class UserTimelineStatistics(object):
         else:
             return total_likes / posts
 
-    def hours_count(self, timeline, n = None):
-        # Zwraca listę zawierajacą godziny, o jakich były dodawane posty oraz liczby postów dodanych o każdej godzinie, posortwoaną wg liczby postów.
-        # Trzeci argument to liczba elementów, jakie mają zostać zwrócone. Domyślnie zwraca całą listę.
+    def hours_count(self, timeline):
+        # Zwraca Counter zawierajacy godziny, o jakich były dodawane posty oraz liczby postów dodanych o każdej godzinie
         hour_hist = col.Counter()
         for post in timeline:
             if not isinstance(post, Status):
                 raise TypeError("Expected Status class instance, got %s" % type(post))
             else:
                 hour_hist[int(post.created_at[11:13])] += 1
-        return hour_hist.most_common(n)
+        return hour_hist
 
     def avg_hour(self, timeline):
         # Zwraca średnią z godzin, o jakich były dodawane posty.
