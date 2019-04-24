@@ -19,21 +19,33 @@
     <main class="content">
       <article class="block">
         <p class="index-main-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus velit orci, ultricies ut turpis in, ornare tempus eros.
+          Profilator lets you analyze your's or someone else's activity on Twitter. It's easy - just type chosen nickname to the form below.
         </p>
       </article>
       <form class="index-form" action="report">
         <input type="text" name="nickname" placeholder="andrzejduda" class="input is-primary" required>
         <input type="submit" value="&raquo;" class="button is-primary">
       </form>
+      {% if error %}
+        <div class="error">
+          <p>{{ error }}</p>
+        </div>
+      {% endif %}
       <article class="block">
         <p class="index-main-text">
-          Lorem ipsum dolor sit amet.
+          If you don't have an idea what nickname to choose here are some possible choices:
+            <ul>
+              <li>AndrzejDuda</li>
+              <li>realDonaldTrump</li>
+              <li>Piechocinski</li>
+              <li>Imaginedragons</li>
+              <li>Pontifex</li>
+            </ul>
         </p>
       </article>
       <article class="block">
-        <img src="{{ url_for('static', filename="img/1.png") }}">
-        <img src="{{ url_for('static', filename="img/1.png") }}">
+        <img src="{{ url_for('static', filename='img/1.png') }}">
+        <img src="{{ url_for('static', filename='img/1.png') }}">
       </article>
     </main>
     <footer class="footer">

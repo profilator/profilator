@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from bokeh.embed import components
 from bokeh.transform import cumsum
 from bokeh.plotting import figure, ColumnDataSource
@@ -7,7 +7,8 @@ from bokeh.util.string import encode_utf8
 from bokeh.models import NumeralTickFormatter
 from user_timeline_statistics import UserTimelineStatistics
 from twitter import Api
-from math import pi
+from twitter.error import TwitterError
+from math import pi, floor, log10
 from numpy import histogram
 import pandas as pd
 import json
@@ -24,6 +25,17 @@ api = Api(consumer_key=tokens["consumer_key"],
           access_token_secret=tokens["access_token_secret"])
 
 account = UserTimelineStatistics()
+
+
+def human_format(num, ends=["", "K", "M", "B", "T"]):
+    # divides by 3 to separate into thousands (...000)
+    if num <= 0:
+        return num
+    index = int(floor(log10(num))/3)
+    number = round(num/(10**(log10(num)-log10(num) % 3)), index)
+    if number.is_integer():
+        number = int(number)
+    return str(number) + ends[index]
 
 
 def create_replies_graph(t):
@@ -76,7 +88,7 @@ def create_favorites_graph(t, bins):
     p.quad("left", "right", "top", "bottom", fill_color="colors", source=source)
     p.xaxis.ticker = bin_edges
 
-    if bin_edges[-1] >= 100000:
+    if bin_edges[-1] >= 10000:
         p.xaxis.major_label_orientation = pi/4
         p.xaxis.formatter = NumeralTickFormatter(format="0,0")
 
@@ -126,7 +138,7 @@ def create_length_graph(t, bins):
     p.quad("left", "right", "top", "bottom", fill_color="colors", source=source)
     p.xaxis.ticker = bin_edges
 
-    if bin_edges[-1] >= 100000:
+    if bin_edges[-1] >= 10000:
         p.xaxis.major_label_orientation = pi/4
         p.xaxis.formatter = NumeralTickFormatter(format="0,0")
 
@@ -152,8 +164,8 @@ def create_posts_in_hours_graph(t):
     m = max(top)
     colors = ["#00c4a6" if v != m else "#007fc4" for v in top]
 
-    p = figure(plot_height=300, plot_width=450, title="Published posts in hours of a day", toolbar_location="right",
-               x_axis_label="Hours", y_axis_label="Number of tweets", tooltips=tooltips)
+    p = figure(plot_height=300, plot_width=450, title="Published posts in hours of a day (UTC +00)",
+               toolbar_location="right", x_axis_label="Hours", y_axis_label="Number of tweets", tooltips=tooltips)
     p.vbar(x=x, width=0.5, bottom=0, top=top, color="#007fc4", fill_color=colors)
     return p
 
@@ -161,7 +173,8 @@ def create_posts_in_hours_graph(t):
 @app.route("/")
 def index():
     html = render_template(
-        "index.html"
+        "index.html",
+        error=request.args.get("error")
     )
     return encode_utf8(html)
 
@@ -169,6 +182,11 @@ def index():
 @app.route("/report")
 def report():
     nickname = request.args.get('nickname')
+
+    try:
+        user = api.GetUser(screen_name=nickname)
+    except TwitterError:
+        return redirect(url_for('index', error="Error: User not found"))
 
     timeline = api.GetUserTimeline(screen_name=nickname, count=200, trim_user=True)
 
@@ -182,14 +200,19 @@ def report():
     js_resources = INLINE.render_js()
     css_resources = INLINE.render_css()
 
+    try:
+        following=human_format(len(api.GetFriendIDs(user.id)))
+    except TwitterError:
+        following = "???"
+
     # render template
     html = render_template(
         "report.html",
         nickname=nickname,
-        tweets="7,602",
-        following="773",
-        followers="1.01M",
-        likes="28",
+        tweets=human_format(user.statuses_count),
+        following=following,
+        followers=human_format(user.followers_count),
+        likes=human_format(user.favourites_count),
         replies_script=replies_script,
         replies_div=replies_div,
         favorites_script=favorites_script,

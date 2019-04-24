@@ -72,6 +72,10 @@ form > input{
   overflow-x: auto;
 }
 
+.error{
+  color: red;
+}
+
 .index-main-text{
   font-size: 1.25em;
   text-align: center;
