@@ -74,6 +74,7 @@ form > input{
 
 .error{
   color: red;
+  margin-bottom: 1em;
 }
 
 .index-main-text{
@@ -111,6 +112,18 @@ ul.account-summary-list li{
 
 ul.account-summary-list li span:first-child{
   color: #046193;
+}
+
+ul.proposed-nicknames{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+ul.proposed-nicknames li{
+  margin: 0 0.5em;
 }
 
 @media only screen and (max-width:500px){

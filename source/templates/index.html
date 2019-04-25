@@ -23,23 +23,23 @@
         </p>
       </article>
       <form class="index-form" action="report">
-        <input type="text" name="nickname" placeholder="andrzejduda" class="input is-primary" required>
+        <input type="text" name="nickname" placeholder="AndrzejDuda" class="input is-primary" required>
         <input type="submit" value="&raquo;" class="button is-primary">
       </form>
       {% if error %}
-        <div class="error">
+        <aside class="error">
           <p>{{ error }}</p>
-        </div>
+        </aside>
       {% endif %}
       <article class="block">
         <p class="index-main-text">
           If you don't have an idea what nickname to choose here are some possible choices:
-            <ul>
-              <li>AndrzejDuda</li>
-              <li>realDonaldTrump</li>
-              <li>Piechocinski</li>
-              <li>Imaginedragons</li>
-              <li>Pontifex</li>
+            <ul class="proposed-nicknames">
+              <li><a href="#" onclick="javascript:fill_input('AndrzejDuda')">AndrzejDuda</a></li>
+              <li><a href="#" onclick="javascript:fill_input('realDonaldTrump')">realDonaldTrump</a></li>
+              <li><a href="#" onclick="javascript:fill_input('Piechocinski')">Piechocinski</a></li>
+              <li><a href="#" onclick="javascript:fill_input('Imaginedragons')">Imaginedragons</a></li>
+              <li><a href="#" onclick="javascript:fill_input('Pontifex')">Pontifex</a></li>
             </ul>
         </p>
       </article>
@@ -51,5 +51,6 @@
     <footer class="footer">
       &copy; 2019
     </footer>
+    <script rel="javascript" src="{{ url_for('static', filename='js/proposed_nicknames.js') }}"></script>
   </body>
 </html>
