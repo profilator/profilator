@@ -133,8 +133,9 @@ def create_length_graph(t, bins):
         ("Tweets", "@top")
     ]
 
-    p = figure(plot_height=300, plot_width=450, title="Tweets Length (number of characters)", toolbar_location="right",
-               x_axis_label="Tweet length", y_axis_label="Number of tweets", tooltips=tooltips)
+    p = figure(plot_height=300, plot_width=450, title="Tweets Length [Yet wrong outcome]",
+               toolbar_location="right", x_axis_label="Tweet length", y_axis_label="Number of tweets",
+               tooltips=tooltips)
     p.quad("left", "right", "top", "bottom", fill_color="colors", source=source)
     p.xaxis.ticker = bin_edges
 
@@ -164,7 +165,7 @@ def create_posts_in_hours_graph(t):
     m = max(top)
     colors = ["#00c4a6" if v != m else "#007fc4" for v in top]
 
-    p = figure(plot_height=300, plot_width=450, title="Published posts in hours of a day (UTC +00)",
+    p = figure(plot_height=300, plot_width=450, title="Published posts in hours of a day [Yet wrong outcome]",
                toolbar_location="right", x_axis_label="Hours", y_axis_label="Number of tweets", tooltips=tooltips)
     p.vbar(x=x, width=0.5, bottom=0, top=top, color="#007fc4", fill_color=colors)
     return p
