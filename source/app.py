@@ -110,6 +110,12 @@ def create_posts_in_days_graph(t):
     p = figure(plot_height=300, plot_width=450, title="Published posts in the days of week", toolbar_location="right",
                x_axis_label="Day of week", y_axis_label="Number of tweets")
     p.vbar(x=[i for i in range(1, 8)], width=0.5, bottom=0, top=lista, fill_color=colors)
+    labels = {}
+    n = 1
+    for k in days.keys():
+        labels[n] = k
+        n += 1
+    p.xaxis.major_label_overrides = labels
     return p
 
 

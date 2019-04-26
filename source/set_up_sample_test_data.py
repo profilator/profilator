@@ -10,7 +10,7 @@ def set_up_sample_test_data():
               consumer_secret=tokens["consumer_secret"],
               access_token_key=tokens["access_token_key"],
               access_token_secret=tokens["access_token_secret"])
-    timeline = api.GetUserTimeline(screen_name="Pontifex", count=20, trim_user=True)
+    timeline = api.GetUserTimeline(screen_name="Piechocinski", count=200, trim_user=True)
     json_timeline = [post.AsDict() for post in timeline]
     with open("test.json", "w") as file:
         json.dump(json_timeline, file, indent=4)
