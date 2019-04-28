@@ -31,11 +31,11 @@ def human_format(num, ends=["", "K", "M", "B", "T"]):
     # divides by 3 to separate into thousands (...000)
     if num <= 0:
         return num
-    index = int(floor(log10(num))/3)
-    number = round(num/(10**(log10(num)-log10(num) % 3)), index)
+    i = int(floor(log10(num))/3)
+    number = round(num/(10**(log10(num)-log10(num) % 3)), i)
     if number.is_integer():
         number = int(number)
-    return str(number) + ends[index]
+    return str(number) + ends[i]
 
 
 def create_replies_graph(t):
@@ -208,18 +208,28 @@ def report():
     css_resources = INLINE.render_css()
 
     try:
-        following=human_format(len(api.GetFriendIDs(user.id)))
+        following_tooltip = len(api.GetFriendIDs(user.id))
+        following = human_format(following_tooltip)
     except TwitterError:
         following = "???"
+        following_tooltip = "Reached api limit"
+
+    tweets = user.statuses_count
+    followers = user.followers_count
+    likes = user.favourites_count
 
     # render template
     html = render_template(
         "report.html",
         nickname=nickname,
-        tweets=human_format(user.statuses_count),
+        tweets=human_format(tweets),
         following=following,
-        followers=human_format(user.followers_count),
-        likes=human_format(user.favourites_count),
+        followers=human_format(followers),
+        likes=human_format(likes),
+        tweets_tooltip=tweets,
+        following_tooltip=following_tooltip,
+        followers_tooltip=followers,
+        likes_tooltip=likes,
         replies_script=replies_script,
         replies_div=replies_div,
         favorites_script=favorites_script,
