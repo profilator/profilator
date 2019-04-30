@@ -110,7 +110,7 @@ ul.account-summary-list li{
   color: #3a3431;
 }
 
-ul.account-summary-list li span:first-child{
+.summary-number{
   color: #046193;
 }
 
