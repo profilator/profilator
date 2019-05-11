@@ -36,6 +36,8 @@ class UserTimelineStatistics(object):
             raise ValueError("An iterable must not be empty")
         days = col.Counter()
         for k in timeline:
+            if not isinstance(k, Status):
+                raise TypeError("Expected Status class instance, got %s" % type(k))
             days[k.created_at[:3]] += 1
         return days
 
