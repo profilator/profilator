@@ -27,19 +27,31 @@
       <h1>@{{ nickname }}</h1>
       <ul class="account-summary-list">
         <li>
-          <span>{{ tweets }}</span>
+          <span class="tooltip">
+            <span class="summary-number">{{ tweets }}</span>
+            <span class="tooltiptext">{{ tweets_tooltip }}</span>
+          </span>
           <span>Tweets</span>
         </li>
         <li>
-          <span>{{ following }}</span>
+          <span class="tooltip">
+            <span class="summary-number">{{ following }}</span>
+            <span class="tooltiptext">{{ following_tooltip }}</span>
+          </span>
           <span>Following</span>
         </li>
         <li>
-          <span>{{ followers }}</span>
+          <span class="tooltip">
+            <span class="summary-number">{{ followers }}</span>
+            <span class="tooltiptext">{{ followers_tooltip }}</span>
+          </span>
           <span>Followers</span>
         </li>
         <li>
-          <span>{{ likes }}</span>
+          <span class="tooltip">
+            <span class="summary-number">{{ likes }}</span>
+            <span class="tooltiptext">{{ likes_tooltip }}</span>
+          </span>
           <span>Likes</span>
         </li>
       </ul>
