@@ -6,9 +6,10 @@ from bokeh.resources import INLINE
 from bokeh.util.string import encode_utf8
 from bokeh.models import NumeralTickFormatter
 from user_timeline_statistics import UserTimelineStatistics
+from tools import Tools
 from twitter import Api
 from twitter.error import TwitterError
-from math import pi, floor, log10
+from math import pi
 from numpy import histogram
 import pandas as pd
 import json
@@ -22,20 +23,11 @@ with open("token/tokens.json", "r") as file:
 api = Api(consumer_key=tokens["consumer_key"],
           consumer_secret=tokens["consumer_secret"],
           access_token_key=tokens["access_token_key"],
-          access_token_secret=tokens["access_token_secret"])
+          access_token_secret=tokens["access_token_secret"],
+          tweet_mode="extended")
 
 account = UserTimelineStatistics()
-
-
-def human_format(num, ends=["", "K", "M", "B", "T"]):
-    # divides by 3 to separate into thousands (...000)
-    if num <= 0:
-        return num
-    i = int(floor(log10(num))/3)
-    number = round(num/(10**(log10(num)-log10(num) % 3)), i)
-    if number.is_integer():
-        number = int(number)
-    return str(number) + ends[i]
+human_format = Tools.human_format
 
 
 def create_replies_graph(t):
@@ -121,7 +113,7 @@ def create_posts_in_days_graph(t):
 
 def create_length_graph(t, bins):
     # tworzy histogram dlugosci postow
-    hist, bin_edges = histogram([len(post.text) for post in t], bins=bins)
+    hist, bin_edges = histogram([len(post.full_text) for post in t], bins=bins)
     bin_edges = [round(i) for i in bin_edges]
     m = max(hist)
     colors = ["#00c4a6" if v != m else "#007fc4" for v in hist]
@@ -139,7 +131,7 @@ def create_length_graph(t, bins):
         ("Tweets", "@top")
     ]
 
-    p = figure(plot_height=300, plot_width=450, title="Tweets Length [Yet wrong outcome]",
+    p = figure(plot_height=300, plot_width=450, title="Tweets Length",
                toolbar_location="right", x_axis_label="Tweet length", y_axis_label="Number of tweets",
                tooltips=tooltips)
     p.quad("left", "right", "top", "bottom", fill_color="colors", source=source)
