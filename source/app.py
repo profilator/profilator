@@ -91,23 +91,52 @@ def create_posts_in_days_graph(t):
     # tworzy wykres słupkowy pokazujący ilość opublikowanych postów w poszczególnych dniach tygodnia
 
     days = account.day_counter(t)
-    lista = []
 
-    for d, posty in days.items():
-        lista.append(posty)
+    # ta lista pełni rolę pojemnika - każda cyfra odpowiada kolejnemu dniowi tygodnia zaczynając od poniedziałku
+    lista = [1,2,3,4,5,6,7]
 
+    # ta lista wykorzystywana jest zarówno przez tooltips jak i pętlę przygotowującą etykiety
+    week = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+
+    # pseudosegregująca pętla - zamienia rekord tabeli 'lista' na liczbę postów w zależności, jaki dzień tygodnia zawiera klucz słownika 'Days'
+    for d, posts in days.items():
+        if d == 'Mon':
+            lista[0] = posts
+        elif d == 'Tue':
+            lista[1] = posts
+        elif d == 'Wed':
+            lista[2] = posts
+        elif d == 'Thu':
+            lista[3] = posts
+        elif d == 'Fri':
+            lista[4] = posts
+        elif d == 'Sat':
+            lista[5] = posts
+        elif d == 'Sun':
+            lista[6] = posts
+
+    tooltips = [
+        ("Day of week", "@week2"),
+        ("Number of posts", "@lista2")
+    ]
+            
     m = max(lista)
     colors = ["#00c4a6" if v != m else "#007fc4" for v in lista]
 
     p = figure(plot_height=300, plot_width=450, title="Published posts in the days of week", toolbar_location="right",
-               x_axis_label="Day of week", y_axis_label="Number of tweets")
+               x_axis_label="Day of week", y_axis_label="Number of tweets", tooltips=tooltips)
     p.vbar(x=[i for i in range(1, 8)], width=0.5, bottom=0, top=lista, fill_color=colors)
     labels = {}
+
+    # pętla przygotowywuje słownik wykorzystywany do etykiety wykresu - co prawda zawsze będzie 7 punktów wykresu, ale nie ma problemu z tickami
     n = 1
-    for k in days.keys():
-        labels[n] = k
+    for d in week:
+        labels[n] = d
         n += 1
     p.xaxis.major_label_overrides = labels
+
+
+    
     return p
 
 
