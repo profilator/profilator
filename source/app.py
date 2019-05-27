@@ -13,6 +13,9 @@ from math import pi
 from numpy import histogram
 import pandas as pd
 import json
+import os
+from os import path
+from wordcloud import WordCloud
 
 app = Flask(__name__)
 
@@ -197,6 +200,13 @@ def create_posts_in_hours_graph(t):
     p.vbar(x=x, width=0.5, bottom=0, top=top, color="#007fc4", fill_color=colors)
     return p
 
+def wordcloud(twitts, pid):
+    text = " ".join(twitts)
+    wordcloud = WordCloud(width=1920, height=1080, max_words=50, background_color="white").generate(text)
+    wordcloud.to_file(pid + ".png")
+    return 1
+    
+
 
 @app.route("/")
 def index():
@@ -223,6 +233,7 @@ def report():
     posts_in_days_script, posts_in_days_div = components(create_posts_in_days_graph(timeline))
     length_script, length_div = components(create_length_graph(timeline, 10))
     posts_in_hours_script, posts_in_hours_div = components(create_posts_in_hours_graph(timeline))
+    wordcloud_div = wordcloud(timeline,"test_pid")
 
     # grab the static resources
     js_resources = INLINE.render_js()
@@ -263,6 +274,7 @@ def report():
         css_resources=css_resources,
         length_script=length_script,
         length_div=length_div,
+        wordcloud_div=wordcloud_div
     )
 
     return encode_utf8(html)
