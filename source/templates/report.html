@@ -18,7 +18,7 @@
     <header class="header">
       <h1>
         <a href="/">
-          <img src="{{ url_for('static', filename="img/logo.png") }}" class="img-logo">
+          <img src="{{ url_for('static', filename='img/logo.png') }}" class="img-logo">
           profilator
         </a>
       </h1>
@@ -61,7 +61,7 @@
         {{ posts_in_hours_div|indent(4)|safe }}
         {{ replies_div|indent(4)|safe }}
         {{ length_div|indent(4)|safe }}
-        {{ wordcloud_div|indent(4)|safe }}
+        <img src="{{ url_for('static', filename=pid) }}">
       </section>
     </main>
     <footer class="footer">

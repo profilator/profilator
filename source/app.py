@@ -101,7 +101,8 @@ def create_posts_in_days_graph(t):
     # ta lista wykorzystywana jest zarówno przez tooltips jak i pętlę przygotowującą etykiety
     week = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
 
-    # pseudosegregująca pętla - zamienia rekord tabeli 'lista' na liczbę postów w zależności, jaki dzień tygodnia zawiera klucz słownika 'Days'
+    # pseudosegregująca pętla - zamienia rekord tabeli 'lista' na liczbę postów w zależności,
+    # jaki dzień tygodnia zawiera klucz słownika 'Days'
     for d, posts in days.items():
         if d == 'Mon':
             lista[0] = posts
@@ -131,15 +132,14 @@ def create_posts_in_days_graph(t):
     p.vbar(x=[i for i in range(1, 8)], width=0.5, bottom=0, top=lista, fill_color=colors)
     labels = {}
 
-    # pętla przygotowywuje słownik wykorzystywany do etykiety wykresu - co prawda zawsze będzie 7 punktów wykresu, ale nie ma problemu z tickami
+    # pętla przygotowywuje słownik wykorzystywany do etykiety wykresu
+    # - co prawda zawsze będzie 7 punktów wykresu, ale nie ma problemu z tickami
     n = 1
     for d in week:
         labels[n] = d
         n += 1
     p.xaxis.major_label_overrides = labels
 
-
-    
     return p
 
 
@@ -200,13 +200,14 @@ def create_posts_in_hours_graph(t):
     p.vbar(x=x, width=0.5, bottom=0, top=top, color="#007fc4", fill_color=colors)
     return p
 
-def wordcloud(twitts, pid):
-    text = " ".join(twitts)
-    wordcloud = WordCloud(width=1920, height=1080, max_words=50, background_color="white").generate(text)
-    wordcloud.to_file(pid + ".png")
-    return 1
-    
 
+def wordcloud(timeline, pid):
+    text = ""
+    for tweet in timeline:
+        text = text + " " + tweet.full_text
+    wc = WordCloud(width=1920, height=1080, max_words=50, background_color="white").generate(text)
+    wc.to_file("static/temp/" + pid + ".png")
+    
 
 @app.route("/")
 def index():
@@ -233,7 +234,7 @@ def report():
     posts_in_days_script, posts_in_days_div = components(create_posts_in_days_graph(timeline))
     length_script, length_div = components(create_length_graph(timeline, 10))
     posts_in_hours_script, posts_in_hours_div = components(create_posts_in_hours_graph(timeline))
-    wordcloud_div = wordcloud(timeline,"test_pid")
+    wordcloud(timeline, user.id_str)
 
     # grab the static resources
     js_resources = INLINE.render_js()
@@ -274,7 +275,7 @@ def report():
         css_resources=css_resources,
         length_script=length_script,
         length_div=length_div,
-        wordcloud_div=wordcloud_div
+        pid="temp/" + user.id_str + ".png"
     )
 
     return encode_utf8(html)
