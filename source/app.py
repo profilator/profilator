@@ -5,17 +5,27 @@ from bokeh.plotting import figure, ColumnDataSource
 from bokeh.resources import INLINE
 from bokeh.util.string import encode_utf8
 from bokeh.models import NumeralTickFormatter
+from bokeh.palettes import Category10
 from user_timeline_statistics import UserTimelineStatistics
 from tools import Tools
 from twitter import Api
+from twitter import Status
 from twitter.error import TwitterError
 from math import pi
+import numpy as np
 from numpy import histogram
 import pandas as pd
 import json
 import os
 from os import path
 from wordcloud import WordCloud
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.manifold import *
+from sklearn.cluster import KMeans
+from sklearn import metrics
+import string
+import re
+
 
 app = Flask(__name__)
 
@@ -201,6 +211,80 @@ def create_posts_in_hours_graph(t):
     return p
 
 
+# Preprocessing and tokenizing
+def preprocessing(line):
+    line = line.lower()
+    line = re.sub(r"[{}]".format(string.punctuation), " ", line)
+    return line
+
+def KMeans_clusters(X, n=10):
+    """
+    Optymalizacja liczby klastrów
+
+    Wyznacza liczbę klastrów, dla której użycie algorytmu KMeans daje największy współczynnik Silhouette Score.
+
+    Parameters
+    ----------
+    X : lista lub macierz
+        Zbiór, który ma być sklasteryzowany
+    n : int
+        Maksymalna liczba klastrów, jaka ma być testowana. Domyślnie 10
+
+    Returns
+    -------
+    int
+        Liczba klastrów z największym Silhouette Score
+
+    """
+    max_score = 0
+    for k in range(2, n + 1):
+        model = KMeans(n_clusters=k).fit(X)
+        clusters = model.predict(X)
+        score = metrics.silhouette_score(X, clusters)
+        if score > max_score:
+            max_score = score
+            max = k
+    return max
+
+def create_tfidf_graph(t):
+    post_list = []  # lista zawierająca treści tweetów
+    for post in t:
+        if not isinstance(post, Status):
+            raise TypeError("Expected Status class instance, got %s" % type(post))
+        text = post.full_text
+        post_list.append(text)
+
+    tfidf_vectorizer = TfidfVectorizer(preprocessor=preprocessing)
+    tfidf = tfidf_vectorizer.fit_transform(post_list)
+
+    mf = LocallyLinearEmbedding()
+    df = pd.DataFrame(mf.fit_transform(tfidf.toarray()))
+
+    n = KMeans_clusters(tfidf, 9)
+    if n > 5:
+        n = n // 2  # jeśli optymalna liczba klastrów wychodzi wieksza niż 5, zmniejsza ją o połowę
+
+    # Klasteryzacja
+    kmeans = KMeans(n_clusters=n).fit(tfidf)
+    clusters = kmeans.predict(tfidf)
+    df["class"] = clusters
+
+    colors = np.hstack([Category10[10]] * 20)
+    source = ColumnDataSource(data=dict(
+        x=df[0],
+        y=df[1],
+        color=colors[clusters].tolist(),
+        desc=post_list,
+    ))
+    tooltips = [
+        ("text", "@desc"),
+    ]
+
+    p = figure(title="Tweets grouped by content", tooltips=tooltips)
+    p.scatter(x='x', y='y', color='color', source=source)
+    return p
+
+
 def wordcloud(timeline, pid):
     text = ""
     for tweet in timeline:
@@ -234,6 +318,7 @@ def report():
     posts_in_days_script, posts_in_days_div = components(create_posts_in_days_graph(timeline))
     length_script, length_div = components(create_length_graph(timeline, 10))
     posts_in_hours_script, posts_in_hours_div = components(create_posts_in_hours_graph(timeline))
+    tfidf_script, tfidf_div = components(create_tfidf_graph(timeline))
     wordcloud(timeline, user.id_str)
 
     # grab the static resources
@@ -275,6 +360,8 @@ def report():
         css_resources=css_resources,
         length_script=length_script,
         length_div=length_div,
+        tfidf_script=tfidf_script,
+        tfidf_div=tfidf_div,
         pid="temp/" + user.id_str + ".png"
     )
 

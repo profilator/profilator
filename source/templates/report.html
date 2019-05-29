@@ -12,6 +12,7 @@
     {{ posts_in_days_script|indent(4)|safe }}
     {{ length_script|indent(4)|safe }}
     {{ posts_in_hours_script|indent(4)|safe }}
+    {{ tfidf_script|indent(4)|safe }}
     <title>profilator</title>
   </head>
   <body>
@@ -61,6 +62,7 @@
         {{ posts_in_hours_div|indent(4)|safe }}
         {{ replies_div|indent(4)|safe }}
         {{ length_div|indent(4)|safe }}
+        {{ tfidf_div|indent(4)|safe }}
         <img src="{{ url_for('static', filename=pid) }}">
       </section>
     </main>
