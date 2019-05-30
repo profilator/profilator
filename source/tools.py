@@ -1,4 +1,5 @@
 from math import floor, log10
+import re
 
 
 class Tools(object):
@@ -13,3 +14,9 @@ class Tools(object):
         if number.is_integer():
             number = int(number)
         return str(number) + ends[i]
+
+    @staticmethod
+    def clean_string(string):
+        # get rid of links, hashtags and mensions in strings.
+        new_string = re.sub(r"(\s|^)(http://|https://)(\w+\.)+\w+(/\S+)*/?(\s|$)", " ", string)
+        return new_string.strip()

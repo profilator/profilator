@@ -40,7 +40,7 @@ api = Api(consumer_key=tokens["consumer_key"],
           tweet_mode="extended")
 
 account = UserTimelineStatistics()
-human_format = Tools.human_format
+
 
 
 def create_replies_graph(t):
@@ -130,8 +130,8 @@ def create_posts_in_days_graph(t):
             lista[6] = posts
 
     tooltips = [
-        ("Day of week", "@week2"),
-        ("Number of posts", "@lista2")
+        ("Day of week", "@week"),
+        ("Number of posts", "@lista")
     ]
             
     m = max(lista)
@@ -216,6 +216,7 @@ def preprocessing(line):
     line = line.lower()
     line = re.sub(r"[{}]".format(string.punctuation), " ", line)
     return line
+
 
 def KMeans_clusters(X, n=10):
     """
@@ -327,7 +328,7 @@ def report():
 
     try:
         following_tooltip = len(api.GetFriendIDs(user.id))
-        following = human_format(following_tooltip)
+        following = Tools.human_format(following_tooltip)
     except TwitterError:
         following = "???"
         following_tooltip = "Reached api limit"
@@ -340,10 +341,10 @@ def report():
     html = render_template(
         "report.html",
         nickname=nickname,
-        tweets=human_format(tweets),
+        tweets=Tools.human_format(tweets),
         following=following,
-        followers=human_format(followers),
-        likes=human_format(likes),
+        followers=Tools.human_format(followers),
+        likes=Tools.human_format(likes),
         tweets_tooltip=tweets,
         following_tooltip=following_tooltip,
         followers_tooltip=followers,
