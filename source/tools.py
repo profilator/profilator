@@ -18,5 +18,6 @@ class Tools(object):
     @staticmethod
     def clean_string(string):
         # get rid of links, hashtags and mensions in strings.
-        new_string = re.sub(r"(\s|^)(http://|https://)(\w+\.)+\w+(/\S+)*/?(\s|$)", " ", string)
+        new_string = re.sub(r"((\s|^)(http://|https://)(\w+\.)+\w+(/\S+)*/?(\s|$))|"
+                            r"((\s|^)[@#]\S+(\s|$))", " ", string)
         return new_string.strip()

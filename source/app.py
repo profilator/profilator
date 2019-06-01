@@ -312,7 +312,10 @@ def report():
     except TwitterError:
         return redirect(url_for('index', error="Error: User not found"))
 
-    timeline = api.GetUserTimeline(screen_name=nickname, count=200, trim_user=True)
+    timeline = api.GetUserTimeline(screen_name=nickname, count=200, trim_user=True, include_rts=False)
+
+    for i, tweet in enumerate(timeline):
+        timeline[i].full_text = Tools.clean_string(tweet.full_text)
 
     replies_script, replies_div = components(create_replies_graph(timeline))
     favorites_script, favorites_div = components(create_favorites_graph(timeline, 10))
