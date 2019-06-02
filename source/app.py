@@ -111,6 +111,12 @@ def create_posts_in_days_graph(t):
     # ta lista wykorzystywana jest zarówno przez tooltips jak i pętlę przygotowującą etykiety
     week = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
 
+    # zmienna przechowująca element listy zawierający największą wartość
+    m = max(lista)
+
+    # kolory, jakimi zostaną wypełnione poszczególne "słupki" wykresu
+    colors = ["#00c4a6" if v != m else "#007fc4" for v in lista]
+
     # pseudosegregująca pętla - zamienia rekord tabeli 'lista' na liczbę postów w zależności,
     # jaki dzień tygodnia zawiera klucz słownika 'Days'
     for d, posts in days.items():
@@ -129,17 +135,22 @@ def create_posts_in_days_graph(t):
         elif d == 'Sun':
             lista[6] = posts
 
+    source = ColumnDataSource(data=dict(
+        x = [i for i in range(1, 8)],
+        width = [0.5,0.5,0.5,0.5,0.5,0.5,0.5],
+        bottom =[0,0,0,0,0,0,0],
+        top=lista,
+        fill_color=colors
+        
+    ))
+
     tooltips = [
-        ("Day of week", "@week"),
-        ("Number of posts", "@lista")
+        ("Number of posts", "@top")
     ]
-            
-    m = max(lista)
-    colors = ["#00c4a6" if v != m else "#007fc4" for v in lista]
 
     p = figure(plot_height=300, plot_width=450, title="Published posts in the days of week", toolbar_location="right",
                x_axis_label="Day of week", y_axis_label="Number of tweets", tooltips=tooltips)
-    p.vbar(x=[i for i in range(1, 8)], width=0.5, bottom=0, top=lista, fill_color=colors)
+    p.vbar(x="x", width="width", bottom="bottom", top="top", fill_color="fill_color", source=source)
     labels = {}
 
     # pętla przygotowywuje słownik wykorzystywany do etykiety wykresu
