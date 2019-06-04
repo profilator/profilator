@@ -11,10 +11,15 @@ def set_up_sample_test_data():
               access_token_key=tokens["access_token_key"],
               access_token_secret=tokens["access_token_secret"],
               tweet_mode="extended")
-    timeline = api.GetUserTimeline(screen_name="Piechocinski", count=200, trim_user=True, include_rts=False)
+    timeline = api.GetUserTimeline(screen_name="Piechocinski", count=5, trim_user=False, include_rts=False)
     json_timeline = [post.AsDict() for post in timeline]
     with open("test.json", "w") as file:
         json.dump(json_timeline, file, indent=4)
+
+    user = api.GetUser(screen_name="Piechocinski")
+    json_user = user.AsDict()
+    with open("test2.json", "w") as file:
+        json.dump(json_user, file, indent=4)
 
 
 if __name__ == "__main__":

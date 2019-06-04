@@ -113,4 +113,5 @@ tokens/
 .idea/*
 
 env
-temp/*
+.png
+.jpg
