@@ -16,6 +16,25 @@ class Tools(object):
         return str(number) + ends[i]
 
     @staticmethod
+    def human_format_date(date):
+        day=date[8]+date[9]
+        month=date[4]+date[5]+date[6]
+        if month=="Jan": month="01"
+        elif month=="Feb": month="02"
+        elif month=="Mar": month="03"
+        elif month=="Apr": month="04"
+        elif month=="May": month="05"
+        elif month=="Jun": month="06"
+        elif month=="Jul": month="07"
+        elif month=="Aug": month="08"
+        elif month=="Sep": month="09"
+        elif month=="Oct": month="10"
+        elif month=="Nov": month="11"
+        elif month=="Dec": month="12"
+        year=date[26]+date[27]+date[28]+date[29]
+        return day+"."+month+"."+year
+		
+    @staticmethod
     def clean_string(string):
         # get rid of links, hashtags and mensions in strings.
         new_string = re.sub(r"((\s|^)(http://|https://)(\w+\.)+\w+(/\S+)*/?(\s|$))|"

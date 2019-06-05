@@ -33,7 +33,6 @@ def index():
     )
     return encode_utf8(html)
 
-
 @app.route("/report")
 def report():
     nickname = request.args.get('nickname')
@@ -55,7 +54,7 @@ def report():
     posts_in_hours_script, posts_in_hours_div = components(create_posts_in_hours_graph(timeline))
     tfidf_script, tfidf_div = components(create_tfidf_graph(timeline))
     wordcloud(timeline, user.id_str)
-
+	
     # grab the static resources
     js_resources = INLINE.render_js()
     css_resources = INLINE.render_css()
@@ -70,7 +69,10 @@ def report():
     tweets = user.statuses_count
     followers = user.followers_count
     likes = user.favourites_count
-
+    posts = len(timeline)
+    date_last = Tools.human_format_date(timeline[0].created_at)
+    date_first = Tools.human_format_date(timeline[len(timeline)-1].created_at)
+	
     # render template
     html = render_template(
         "report.html",
@@ -97,6 +99,8 @@ def report():
         length_div=length_div,
         tfidf_script=tfidf_script,
         tfidf_div=tfidf_div,
+	    posts=Tools.human_format(posts),
+        date_interval=date_first+" - "+date_last,
         pid="temp/" + user.id_str + ".png"
     )
 
