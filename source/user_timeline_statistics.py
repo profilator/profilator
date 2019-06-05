@@ -19,6 +19,16 @@ class UserTimelineStatistics(object):
                 replies += 1
         return replies
 
+    def retweets_count(self, timeline):
+        # zwraca ile spośród wpisów użytkownika to odpowiedzi
+        retweets = 0
+        for status in timeline:
+            if not isinstance(status, Status):
+                raise TypeError("Expected Status class instance, got %s" % type(status))
+            if "retweeted_status" in status.AsDict():
+                retweets += 1
+        return retweets
+
     def replies_percentage(self, timeline):
         # zwraca procent odpowiedzi spośród wszystkich statusów w timeline
         if not isinstance(timeline, Iterable):
@@ -161,9 +171,9 @@ class UserTimelineStatistics(object):
             raise TypeError("Expected an iterable of Status objects, got %s" % type(timeline))
 
         for post in timeline:
-            if post.text:
-                if isinstance(post.text, string):
-                    tweets_length += len(text.split())
+            if post.full_text:
+                if isinstance(post.text, str):
+                    tweets_length += len(post.full_text.split())
                 else:
                     raise TypeError("Expected a string, got %s" % type(post.text))
             posts += 1

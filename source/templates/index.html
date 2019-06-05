@@ -11,7 +11,7 @@
     <header class="header">
       <h1>
         <a href="/">
-          <img src="{{ url_for('static', filename="img/logo.png") }}" class="img-logo">
+          <img src="{{ url_for('static', filename='img/logo.png') }}" class="img-logo">
           profilator
         </a>
       </h1>
@@ -25,6 +25,11 @@
       <form class="index-form" action="report">
         <input type="text" name="nickname" placeholder="AndrzejDuda" class="input is-primary" required>
         <input type="submit" value="&raquo;" class="button is-primary">
+        Include:
+        <label><input type="checkbox" name="tweets" class="inclusions" checked>Tweets</label>
+        <label><input type="checkbox" name="replies" class="inclusions" checked>Replies</label>
+        <label><input type="checkbox" name="retweets" class="inclusions">Retweets</label>
+        <label><input type="checkbox" name="links">Cut out links inside tweets</label>
       </form>
       {% if error %}
         <aside class="error">

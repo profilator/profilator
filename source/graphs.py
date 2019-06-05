@@ -22,15 +22,17 @@ account = UserTimelineStatistics()
 def create_replies_graph(t):
     # tworzy wykres kołowy przedstawiający ilość odpowiedzi
     replies = account.replies_count(t)
+    retweets = account.retweets_count(t)
 
     x = {
-        "posts": len(t) - replies,
+        "tweets": len(t) - replies - retweets,
         "replies": replies,
+        "retweets": retweets
     }
 
     data = pd.Series(x).reset_index(name="value").rename(columns={"index": "tweet_type"})
     data["angle"] = data["value"] / data["value"].sum() * 2 * pi
-    data["color"] = ["#00c4a6", "#007fc4"]
+    data["color"] = ["#00c4a6", "#007fc4", "#49b6f9"]
 
     p = figure(plot_height=300, plot_width=450, title="Replies Count", toolbar_location=None,
                tools="hover", tooltips="@tweet_type: @value", x_range=(-0.5, 1.0))

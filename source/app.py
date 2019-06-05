@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for
 from bokeh.embed import components
 from bokeh.resources import INLINE
 from bokeh.util.string import encode_utf8
-from user_timeline_statistics import UserTimelineStatistics
 from tools import Tools
 from twitter import Api
 from twitter.error import TwitterError
@@ -22,8 +21,6 @@ api = Api(consumer_key=tokens["consumer_key"],
           access_token_secret=tokens["access_token_secret"],
           tweet_mode="extended")
 
-account = UserTimelineStatistics()
-
 
 @app.route("/")
 def index():
@@ -36,17 +33,35 @@ def index():
 
 @app.route("/report")
 def report():
+    if not request.args.get("tweets") and not request.args.get("retweets") and not request.args.get("replies"):
+        return redirect(url_for('index', error="Error: At least one \"include\" option need to be checked."))
+
     nickname = request.args.get('nickname')
 
     try:
         user = api.GetUser(screen_name=nickname)
     except TwitterError:
-        return redirect(url_for('index', error="Error: User not found"))
+        return redirect(url_for('index', error="Error: User not found."))
 
-    timeline = api.GetUserTimeline(screen_name=nickname, count=200, trim_user=True, include_rts=False)
+    timeline = api.GetUserTimeline(screen_name=nickname, count=200, trim_user=True,
+                                   include_rts=request.args.get("retweets"),
+                                   exclude_replies=not request.args.get("replies"))
 
-    # for i, tweet in enumerate(timeline):
-        # timeline[i].full_text = Tools.clean_string(tweet.full_text)
+    if not request.args.get("tweets"):
+        timeline = Tools.cut_tweets(timeline)
+
+    if request.args.get("links"):
+        old_timeline = timeline.copy()
+        i = 0
+        for tweet in old_timeline:
+            timeline[i].full_text = Tools.clean_links(tweet.full_text)
+            if timeline[i].full_text == "":
+                del timeline[i]
+            else:
+                i += 1
+
+    if len(timeline) < 3:
+        return redirect(url_for('index', error="Error: Too few tweets with given criteria found."))
 
     replies_script, replies_div = components(create_replies_graph(timeline))
     favorites_script, favorites_div = components(create_favorites_graph(timeline, 10))
@@ -97,7 +112,11 @@ def report():
         length_div=length_div,
         tfidf_script=tfidf_script,
         tfidf_div=tfidf_div,
-        pid="temp/" + user.id_str + ".png"
+        pid="temp/" + user.id_str + ".png",
+        tweets_checked=request.args.get("tweets"),
+        replies_checked=request.args.get("replies"),
+        retweets_checked = request.args.get("retweets"),
+        links_checked = request.args.get("links"),
     )
 
     return encode_utf8(html)

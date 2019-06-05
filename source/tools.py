@@ -16,8 +16,19 @@ class Tools(object):
         return str(number) + ends[i]
 
     @staticmethod
-    def clean_string(string):
+    def clean_links(string):
         # get rid of links, hashtags and mensions in strings.
-        new_string = re.sub(r"((\s|^)(http://|https://)(\w+\.)+\w+(/\S+)*/?(\s|$))|"
-                            r"((\s|^)[@#]\S+(\s|$))", " ", string)
+        new_string = re.sub(r"((\s|^)http[s]?://(\w+\.)+\w+(/\S+)*/?(\s|$))", " ", string)
         return new_string.strip()
+
+    @staticmethod
+    def cut_tweets(timeline):
+        new_timeline = timeline.copy()
+        i = 0
+        for post in timeline:
+            post_dict = post.AsDict()
+            if "in_reply_to_status_id" not in post_dict and "retweeted_status" not in post_dict:
+                del new_timeline[i]
+            else:
+                i += 1
+        return new_timeline
