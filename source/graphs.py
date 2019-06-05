@@ -88,12 +88,6 @@ def create_posts_in_days_graph(t):
     # ta lista wykorzystywana jest zarówno przez tooltips jak i pętlę przygotowującą etykiety
     week = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
 
-    # zmienna przechowująca element listy zawierający największą wartość
-    m = max(lista)
-
-    # kolory, jakimi zostaną wypełnione poszczególne "słupki" wykresu
-    colors = ["#00c4a6" if v != m else "#007fc4" for v in lista]
-
     # pseudosegregująca pętla - zamienia rekord tabeli 'lista' na liczbę postów w zależności,
     # jaki dzień tygodnia zawiera klucz słownika 'Days'
     for d, posts in days.items():
@@ -111,6 +105,12 @@ def create_posts_in_days_graph(t):
             lista[5] = posts
         elif d == 'Sun':
             lista[6] = posts
+
+    # zmienna przechowująca element listy zawierający największą wartość
+    m = max(lista)
+
+    # kolory, jakimi zostaną wypełnione poszczególne "słupki" wykresu
+    colors = ["#00c4a6" if v != m else "#007fc4" for v in lista]
 
     source = ColumnDataSource(data=dict(
         x = [i for i in range(1, 8)],
