@@ -175,7 +175,7 @@ def create_length_graph(t, bins):
 
 
 def create_posts_in_hours_graph(t):
-    # tworzy wykres słupkowy pokazujący ilość opublikowanych postów w poszczególnych godzinach
+    """Tworzy wykres słupkowy pokazujący ilość opublikowanych postów w poszczególnych godzinach."""
 
     hours = account.hours_count(t)
     top = []
@@ -200,6 +200,7 @@ def create_posts_in_hours_graph(t):
 
 
 def preprocessing(line):
+    """Preprocessing and tokenizing"""
     line = line.lower()
     line = re.sub(r"[{}]".format(string.punctuation), " ", line)
     return line
@@ -209,14 +210,16 @@ def KMeans_clusters(X, n=10):
     """
     Optymalizacja liczby klastrów
 
-    Wyznacza liczbę klastrów, dla której użycie algorytmu KMeans daje największy współczynnik Silhouette Score.
+    Wyznacza liczbę klastrów z podanego przedziału, dla której użycie algorytmu KMeans daje największy współczynnik
+    Silhouette Score.
 
     Parameters
     ----------
-    X : lista lub macierz
+    X : tablica lub macierz rzadka, kształt = [n_samples, n_features]
         Zbiór, który ma być sklasteryzowany
     n : int
-        Maksymalna liczba klastrów, jaka ma być testowana. Domyślnie 10
+        Maksymalna liczba klastrów, jaka ma być testowana. Domyślnie 10.
+        Musi być mniejsza niż liczba elementów w zbiorze X. Nie może być mniejsza niż 2.
 
     Returns
     -------
@@ -225,6 +228,7 @@ def KMeans_clusters(X, n=10):
 
     """
     max_score = 0
+    max = 1
     for k in range(2, n + 1):
         model = KMeans(n_clusters=k).fit(X)
         clusters = model.predict(X)
@@ -236,6 +240,11 @@ def KMeans_clusters(X, n=10):
 
 
 def create_tfidf_graph(t):
+    """Tworzy wykres przedstawiający posty sklasteryzowane wg TF-IDF."""
+    if len(t) < 3:  # manifold nie działa, kiedy postów jest mniej niż 3
+        p = figure(title="Too small number of tweets")
+        return p
+
     post_list = []  # lista zawierająca treści tweetów
     for post in t:
         if not isinstance(post, Status):
@@ -246,12 +255,13 @@ def create_tfidf_graph(t):
     tfidf_vectorizer = TfidfVectorizer(preprocessor=preprocessing)
     tfidf = tfidf_vectorizer.fit_transform(post_list)
 
-    mf = LocallyLinearEmbedding()
+    mf = LocallyLinearEmbedding(n_neighbors=min(5, len(t)-1))
     df = pd.DataFrame(mf.fit_transform(tfidf.toarray()))
 
-    n = KMeans_clusters(tfidf, 9)
+    # Jeśli postów, jest mniej niż dziewięć, maksymlna liczba klastrów wynosi len(t)-1
+    n = KMeans_clusters(tfidf, min(9, len(t)-1))
     if n > 5:
-        n = n // 2  # jeśli optymalna liczba klastrów wychodzi wieksza niż 5, zmniejsza ją o połowę
+        n = n // 2  # jeśli optymalna liczba klastrów wychodzi większa niż 5, zmniejsza ją o połowę
 
     # Klasteryzacja
     kmeans = KMeans(n_clusters=n).fit(tfidf)
@@ -265,9 +275,11 @@ def create_tfidf_graph(t):
         color=colors[clusters].tolist(),
         desc=post_list,
     ))
-    tooltips = [
-        ("text", "@desc"),
-    ]
+    tooltips = """
+    <div style="width:250px;">
+    @desc
+    </div>
+    """
 
     p = figure(title="Tweets grouped by content", tooltips=tooltips)
     p.scatter(x='x', y='y', color='color', source=source)
