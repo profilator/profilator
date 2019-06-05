@@ -55,6 +55,18 @@
           </span>
           <span>Likes</span>
         </li>
+		 <li>
+          <span class="tooltip">
+            <span class="summary-number">{{ posts }}</span>
+          </span>
+          <span>Scanned Posts</span>
+        </li>
+		 <li>
+          <span class="tooltip">
+            <span class="summary-number">{{ date_interval }}</span>
+          </span>
+          <span>Posts Date Interval</span>
+        </li>
       </ul>
       <form class="index-form" action="report">
         <input type="text" name="nickname" value="{{ nickname }}" class="input is-primary" required>

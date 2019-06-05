@@ -85,6 +85,9 @@ def report():
     tweets = user.statuses_count
     followers = user.followers_count
     likes = user.favourites_count
+    posts = len(timeline)
+    date_last = Tools.human_format_date(timeline[0].created_at)
+    date_first = Tools.human_format_date(timeline[len(timeline)-1].created_at)
 
     # render template
     html = render_template(
@@ -117,6 +120,8 @@ def report():
         replies_checked=request.args.get("replies"),
         retweets_checked = request.args.get("retweets"),
         links_checked = request.args.get("links"),
+        posts=Tools.human_format(posts),
+        date_interval=date_first+" - "+date_last,
     )
 
     return encode_utf8(html)
