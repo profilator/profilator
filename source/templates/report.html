@@ -55,7 +55,7 @@
           </span>
           <span>Likes</span>
         </li>
-		 <li>
+		    <li>
           <span class="tooltip">
             <span class="summary-number">{{ posts }}</span>
           </span>
@@ -69,8 +69,10 @@
         </li>
       </ul>
       <form class="index-form" action="report">
-        <input type="text" name="nickname" value="{{ nickname }}" class="input is-primary" required>
-        <input type="submit" value="&raquo;" class="button is-primary">
+        <div>
+          <input type="text" name="nickname" value="{{ nickname }}" class="input is-primary" required>
+          <input type="submit" value="&raquo;" class="button is-primary">
+        </div>
         Include:
         <label><input type="checkbox" name="tweets" class="inclusions" {% if tweets_checked %}checked{% endif %}>Tweets</label>
         <label><input type="checkbox" name="replies" class="inclusions" {% if replies_checked %}checked{% endif %}>Replies</label>

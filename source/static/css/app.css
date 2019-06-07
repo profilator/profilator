@@ -90,12 +90,19 @@ form > input{
 
 .index-form{
   display: flex;
+  flex-direction: column;
   margin: 3em 0;
   max-width: 500px;
 }
 
+.index-form div{
+  display: flex;
+  margin: 0 0 1em 0;
+}
+
 ul.account-summary-list{
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   list-style-type: none;
   margin: 0 0 1em 0;
@@ -106,7 +113,7 @@ ul.account-summary-list li{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 0.5em;
+  margin: 0.5em;
   color: #3a3431;
 }
 
