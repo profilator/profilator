@@ -6,6 +6,7 @@ from tools import Tools
 from twitter import Api
 from twitter.error import TwitterError
 import json
+import requests
 
 from graphs import *
 
@@ -75,6 +76,12 @@ def report():
     js_resources = INLINE.render_js()
     css_resources = INLINE.render_css()
 
+    avatar_url="https://twitter.com/" + nickname + "/profile_image?size=bigger"
+    r = requests.get(avatar_url)
+    avatar_path = "static/temp/avatar" + user.id_str + ".png"
+    with open(avatar_path, 'wb') as f:
+        f.write(r.content)
+
     try:
         following_tooltip = len(api.GetFriendIDs(user.id))
         following = Tools.human_format(following_tooltip)
@@ -116,6 +123,7 @@ def report():
         tfidf_script=tfidf_script,
         tfidf_div=tfidf_div,
         pid="temp/" + user.id_str + ".png",
+        avatar="temp/avatar" + user.id_str + ".png",
         tweets_checked=request.args.get("tweets"),
         replies_checked=request.args.get("replies"),
         retweets_checked = request.args.get("retweets"),
@@ -129,4 +137,3 @@ def report():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
