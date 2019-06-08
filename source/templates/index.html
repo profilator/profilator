@@ -28,7 +28,7 @@
           <input type="submit" value="&raquo;" class="button is-primary">
         </div>
         Include:
-        <label><input type="checkbox" name="tweets" class="inclusions" {% if tweets_checked %}checked{% endif %}>Tweets</label>
+        <label><input type="checkbox" name="tweets" class="inclusions" checked>Tweets</label>
         <label><input type="checkbox" name="replies" class="inclusions" {% if replies_checked %}checked{% endif %}>Replies</label>
         <label><input type="checkbox" name="retweets" class="inclusions" {% if retweets_checked %}checked{% endif %}>Retweets</label>
         <label><input type="checkbox" name="links" {% if links_checked %}checked{% endif %}>Cut out links inside tweets</label>
@@ -52,7 +52,7 @@
       </article>
       <article class="block">
         <img src="{{ url_for('static', filename='img/1.png') }}">
-        <img src="{{ url_for('static', filename='img/1.png') }}">
+        <img src="{{ url_for('static', filename='img/2.png') }}">
       </article>
     </main>
     <footer class="footer">
