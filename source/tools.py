@@ -1,6 +1,6 @@
 from math import floor, log10
 import re
-
+from guess_language import guess_language
 
 class Tools(object):
 
@@ -51,3 +51,26 @@ class Tools(object):
             else:
                 i += 1
         return new_timeline
+		
+    @staticmethod
+    def language(timeline):
+        text = ""
+        for tweet in timeline:
+            text = text + " " + tweet.full_text
+        return guess_language(text)
+
+    @staticmethod
+    def cut_stopwords(timeline):
+        stopwords = set()
+        file = open('stopwords/pl.txt','r').read()
+        rows = file.split('\n')
+        for row in rows:
+            stopwords.add(row)
+		
+        for tweet in timeline:
+            words=tweet.full_text.split()
+            for word in words:
+                if word in stopwords:
+                    words.remove(word)
+            tweet.full_text=" ".join(words)
+        return timeline

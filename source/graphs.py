@@ -15,6 +15,7 @@ from sklearn.manifold import LocallyLinearEmbedding
 from twitter import Status
 from wordcloud import WordCloud
 from user_timeline_statistics import UserTimelineStatistics
+from guess_language import guess_language
 
 account = UserTimelineStatistics()
 
@@ -292,3 +293,14 @@ def wordcloud(timeline, pid):
         text = text + " " + tweet.full_text
     wc = WordCloud(width=1920, height=1080, max_words=50, background_color="white").generate(text)
     wc.to_file("static/temp/" + pid + ".png")
+	
+def create_languages_graph(timeline):
+    # tworzy wykres kołowy jezykow
+    languages = {}
+    for tweet in timeline:
+        language=guess_language(tweet.full_text)
+        if language in languages:
+            languages[language]=languages[language]+1			
+        else:
+            languages[language]=1
+    return languages
