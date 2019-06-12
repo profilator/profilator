@@ -58,19 +58,3 @@ class Tools(object):
         for tweet in timeline:
             text = text + " " + tweet.full_text
         return guess_language(text)
-
-    @staticmethod
-    def cut_stopwords(timeline):
-        stopwords = set()
-        file = open('stopwords/pl.txt','r').read()
-        rows = file.split('\n')
-        for row in rows:
-            stopwords.add(row)
-		
-        for tweet in timeline:
-            words=tweet.full_text.split()
-            for word in words:
-                if word in stopwords:
-                    words.remove(word)
-            tweet.full_text=" ".join(words)
-        return timeline

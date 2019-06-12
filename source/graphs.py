@@ -84,7 +84,7 @@ def create_posts_in_days_graph(t):
     days = account.day_counter(t)
 
     # ta lista pełni rolę pojemnika - każda cyfra odpowiada kolejnemu dniowi tygodnia zaczynając od poniedziałku
-    lista = [1,2,3,4,5,6,7]
+    lista = [0,0,0,0,0,0,0]
 
     # ta lista wykorzystywana jest zarówno przez tooltips jak i pętlę przygotowującą etykiety
     week = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
@@ -253,7 +253,11 @@ def create_tfidf_graph(t):
         text = post.full_text
         post_list.append(text)
 
-    tfidf_vectorizer = TfidfVectorizer(preprocessor=preprocessing)
+    file = open('stopwords.txt','r').read()
+    rows = file.split('\n')
+    stopwords = list(rows)	
+ 	
+    tfidf_vectorizer = TfidfVectorizer(preprocessor=preprocessing, stop_words=stopwords)
     tfidf = tfidf_vectorizer.fit_transform(post_list)
 
     mf = LocallyLinearEmbedding(n_neighbors=min(5, len(t)-1))
@@ -288,14 +292,17 @@ def create_tfidf_graph(t):
 
 
 def wordcloud(timeline, pid):
+    file = open('stopwords.txt','r').read()
+    rows = file.split('\n')
+    stopwords = set(rows)
     text = ""
     for tweet in timeline:
         text = text + " " + tweet.full_text
-    wc = WordCloud(width=1920, height=1080, max_words=50, background_color="white").generate(text)
-    wc.to_file("static/temp/" + pid + ".png")
+    wc = WordCloud(stopwords=stopwords, width=1920, height=1080, max_words=50, background_color="white").generate(text)
+    wc.to_file("static/temp/WC" + pid + ".png")
 	
 def create_languages_graph(timeline):
-    # tworzy wykres kołowy jezykow
+    # tworzy wykres kołowy jezykow (narazie robi mape {jezyk: ilosc postow})
     languages = {}
     for tweet in timeline:
         language=guess_language(tweet.full_text)

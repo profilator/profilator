@@ -122,7 +122,7 @@ def report():
         length_div=length_div,
         tfidf_script=tfidf_script,
         tfidf_div=tfidf_div,
-        pid="temp/" + user.id_str + ".png",
+        pid="temp/WC" + user.id_str + ".png",
         avatar="temp/avatar" + user.id_str + ".png",
         tweets_checked=request.args.get("tweets"),
         replies_checked=request.args.get("replies"),
