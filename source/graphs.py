@@ -79,6 +79,8 @@ def create_favorites_graph(t, bins):
 
 
 def create_posts_in_days_graph(t):
+    """Tworzenie wykresu przedstawiającego ilości postów opublikowanych w określonych dniach tygodnia."""
+    
     # tworzy wykres słupkowy pokazujący ilość opublikowanych postów w poszczególnych dniach tygodnia
 
     days = account.day_counter(t)
