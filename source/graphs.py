@@ -265,10 +265,8 @@ def create_tfidf_graph(t):
     mf = LocallyLinearEmbedding(n_neighbors=min(5, len(t)-1))
     df = pd.DataFrame(mf.fit_transform(tfidf.toarray()))
 
-    # Jeśli postów, jest mniej niż dziewięć, maksymlna liczba klastrów wynosi len(t)-1
-    n = KMeans_clusters(tfidf, min(9, len(t)-1))
-    if n > 5:
-        n = n // 2  # jeśli optymalna liczba klastrów wychodzi większa niż 5, zmniejsza ją o połowę
+    # Jeśli postów jest mniej niż cztery, maksymlna liczba klastrów wynosi len(t)-1
+    n = KMeans_clusters(tfidf, min(4, len(t)-1))
 
     # Klasteryzacja
     kmeans = KMeans(n_clusters=n).fit(tfidf)
