@@ -9,7 +9,13 @@ body{
 
 img{
   max-width: 65%;
-  padding: 0.1em;
+  margin: 0.1em;
+  border: 1px solid lightgray;
+  border-radius: 0 25px 0 25px;
+}
+
+.img-clean{
+  border: none;
 }
 
 form{
