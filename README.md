@@ -24,6 +24,16 @@ source ENV/bin/activate
 pip3 install -r requirements.txt
 ```
 
+You will also need Twitter token, obtainable from [here](https://developer.twitter.com/app/new). Create file '/source/token/token.json' with following content:
+```
+{
+  "consumer_key": " ",
+  "consumer_secret": " ",
+  "access_token_key": " ",
+  "access_token_secret": " "
+}
+```
+
 Next, head to the source folder, and start the dev server on ```localhost:5000```:
 ```
 cd source
