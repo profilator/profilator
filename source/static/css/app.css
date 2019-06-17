@@ -28,6 +28,7 @@ label > input{
 
 .img-logo{
   max-height: 2em;
+  border: none;
 }
 
 .header{
