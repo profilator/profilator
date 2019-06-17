@@ -22,9 +22,8 @@ form{
   width: 50vw;
 }
 
-form > input{
-  color: #000;
-  background: #fff;
+label > input{
+  margin-right: 0.4em;
 }
 
 .img-logo{
